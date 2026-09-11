@@ -1,0 +1,142 @@
+@import "tailwindcss";
+@import "lenis/dist/lenis.css";
+
+@theme {
+  --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: Inter, ui-sans-serif, system-ui, sans-serif;
+}
+
+:root {
+  --bg: #0f1115;
+  --ink: #e7e9ee;
+  --mute: #8b909c;
+  --card: #171a21;
+  --line: #2a2f3a;
+  --nav: rgb(23 26 33 / 0.82);
+  --stroke: rgb(231 233 238 / 0.18);
+}
+
+html.light {
+  --bg: #eceef2;
+  --ink: #111215;
+  --mute: #5c616c;
+  --card: #ffffff;
+  --line: #d5d8e0;
+  --nav: rgb(255 255 255 / 0.86);
+  --stroke: rgb(17 18 21 / 0.16);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  overflow-x: hidden;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  overflow-x: hidden;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  transition: background 0.45s ease, color 0.45s ease;
+}
+
+::selection {
+  background: #3b82f6;
+  color: #fff;
+}
+
+a {
+  color: inherit;
+}
+
+section[id] {
+  scroll-margin-top: 5.5rem;
+}
+
+.waves {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background:
+    radial-gradient(720px 360px at 78% 8%, rgb(59 130 246 / 0.05), transparent 55%),
+    radial-gradient(560px 400px at 8% 88%, rgb(59 130 246 / 0.035), transparent 50%);
+}
+
+.waves svg {
+  width: 100%;
+  height: 100%;
+  opacity: 0.22;
+}
+
+.outline-name {
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--stroke);
+  letter-spacing: -0.06em;
+  white-space: nowrap;
+  font-weight: 500;
+}
+
+.name-track {
+  display: flex;
+  width: max-content;
+  animation: name-marquee 28s linear infinite;
+}
+
+.skill-track {
+  display: flex;
+  width: max-content;
+  animation: name-marquee 32s linear infinite;
+}
+
+@keyframes name-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 22px;
+}
+
+.icon-tile {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  transition: transform 0.25s ease, border-color 0.25s ease;
+}
+
+.icon-tile:hover {
+  transform: translateY(-4px);
+  border-color: #3b82f6;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .name-track,
+  .skill-track {
+    animation: none;
+  }
+}
+
+@media (max-width: 767px) {
+  html,
+  body {
+    overflow-x: clip;
+  }
+}
