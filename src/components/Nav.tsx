@@ -61,7 +61,7 @@ export function Nav({ onAsk }: { onAsk: () => void }) {
           <button
             type="button"
             onClick={() => go('contact')}
-            className="hidden min-h-11 rounded-full bg-[var(--ink)] px-4 py-2 text-[11px] font-semibold tracking-[0.12em] text-[var(--bg)] uppercase sm:inline"
+            className="btn-glow hidden min-h-11 rounded-full bg-[var(--ink)] px-4 py-2 text-[11px] font-semibold tracking-[0.12em] text-[var(--bg)] uppercase sm:inline"
           >
             Hire Me
           </button>

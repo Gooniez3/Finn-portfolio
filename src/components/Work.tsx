@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react'
+import { AnimatePresence, motion } from 'framer-motion'
 import { projects } from '../data/site'
+import { Headline, Kicker, Reveal } from './Reveal'
 
 export function Work() {
   const [active, setActive] = useState(0)
@@ -15,18 +17,25 @@ export function Work() {
   return (
     <section id="work" className="relative overflow-x-clip scroll-mt-24 px-5 py-16 md:px-8 md:py-24">
       <div className="mx-auto max-w-6xl">
-        <p className="text-[11px] tracking-[0.28em] text-[#3b82f6] uppercase">Selected work</p>
-        <h2 className="mt-3 font-display text-4xl font-bold tracking-[-0.04em] md:text-6xl">Shipped products</h2>
-        <p className="mt-3 max-w-xl text-[var(--mute)]">Three systems with users. Not a gallery of demos.</p>
+        <Reveal>
+          <Kicker>Selected work</Kicker>
+          <Headline
+            className="mt-3 font-display text-4xl font-bold tracking-[-0.04em] md:text-6xl"
+            text="Shipped products"
+          />
+          <p className="mt-3 max-w-xl text-[var(--mute)]">Three systems with users. Not a gallery of demos.</p>
+        </Reveal>
 
         <div className="mt-10 space-y-8 md:hidden">
-          {projects.map((item) => (
-            <article key={item.id} className="card overflow-hidden">
-              <div className="bg-[var(--bg)] px-2 pt-2">
-                <img src={item.image} alt={item.name} className="aspect-[16/9] w-full object-contain" />
-              </div>
-              <ProjectCopy item={item} compact />
-            </article>
+          {projects.map((item, i) => (
+            <Reveal key={item.id} delay={i * 0.08} y={40}>
+              <article className="card overflow-hidden">
+                <div className="bg-[var(--bg)] px-2 pt-2">
+                  <img src={item.image} alt={item.name} className="aspect-[16/9] w-full object-contain" />
+                </div>
+                <ProjectCopy item={item} compact />
+              </article>
+            </Reveal>
           ))}
         </div>
 
@@ -35,7 +44,15 @@ export function Work() {
           onMouseEnter={() => setPaused(true)}
           onMouseLeave={() => setPaused(false)}
         >
-          <div className="relative mx-auto h-[400px] max-w-6xl lg:h-[440px]" style={{ perspective: '1200px' }}>
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            className="relative mx-auto h-[400px] max-w-6xl lg:h-[440px]"
+            style={{ perspective: '1200px' }}
+          >
+            <div className="pointer-events-none absolute top-1/2 left-1/2 h-56 w-56 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#3b82f6]/20 blur-3xl" />
             {projects.map((item, i) => {
               const offset = i - active
               const abs = Math.abs(offset)
@@ -65,9 +82,19 @@ export function Work() {
                 </button>
               )
             })}
-          </div>
+          </motion.div>
 
-          <ProjectCopy item={project} />
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={project.id}
+              initial={{ opacity: 0, y: 22, filter: 'blur(8px)' }}
+              animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+              exit={{ opacity: 0, y: -16, filter: 'blur(8px)' }}
+              transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+            >
+              <ProjectCopy item={project} />
+            </motion.div>
+          </AnimatePresence>
 
           <div className="mt-8 flex justify-center gap-2">
             {projects.map((item, i) => (
@@ -117,19 +144,20 @@ function ProjectCopy({
       </p>
       <ul className={compact ? 'mt-5 grid gap-3 text-left' : 'mt-9 grid gap-3 text-left sm:grid-cols-2'}>
         {item.points.map((point) => (
-          <li
+          <motion.li
             key={point.label}
-            className="rounded-2xl border px-4 py-4"
-            style={{ borderColor: 'var(--line)', background: 'var(--card)' }}
+            className="card px-4 py-4"
+            whileHover={{ y: -4 }}
+            transition={{ type: 'spring', stiffness: 280, damping: 20 }}
           >
             <p className="text-[11px] font-bold tracking-[0.16em] text-[#3b82f6] uppercase">{point.label}</p>
             <p className="mt-2 text-[15px] leading-6 text-[var(--ink)]">{point.text}</p>
-          </li>
+          </motion.li>
         ))}
       </ul>
       <div className={compact ? 'mt-4 flex flex-wrap gap-2' : 'mt-7 flex flex-wrap justify-center gap-2'}>
         {item.stack.map((tag) => (
-          <span key={tag} className="rounded-full border px-3 py-1 text-[11px] font-medium tracking-[0.08em] uppercase" style={{ borderColor: 'var(--line)' }}>
+          <span key={tag} className="chip px-3 py-1 text-[11px] font-medium tracking-[0.08em] uppercase">
             {tag}
           </span>
         ))}

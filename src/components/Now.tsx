@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { profile } from '../data/site'
+import { Reveal } from './Reveal'
 
 const facts = [
   { n: '01', title: 'CapyTech POS', detail: 'Live on a shop PC' },
@@ -29,18 +30,26 @@ export function Now() {
   return (
     <section className="relative border-y px-5 py-6 md:px-8" style={{ borderColor: 'var(--line)' }}>
       <div className="mx-auto flex max-w-6xl flex-col gap-5 md:flex-row md:items-center md:justify-between">
-        <p className="shrink-0 text-[11px] tracking-[0.18em] text-[var(--mute)] uppercase">
-          {profile.city} · {time || '--:--'}
-        </p>
+        <Reveal y={16}>
+          <p className="flex items-center gap-2 text-[11px] tracking-[0.18em] text-[var(--mute)] uppercase">
+            <span className="relative flex h-1.5 w-1.5">
+              <span className="absolute inset-0 animate-ping rounded-full bg-[#22c55e] opacity-70" />
+              <span className="relative h-1.5 w-1.5 rounded-full bg-[#22c55e]" />
+            </span>
+            {profile.city} · {time || '--:--'}
+          </p>
+        </Reveal>
         <div className="grid flex-1 gap-x-8 gap-y-3 sm:grid-cols-3 md:max-w-3xl">
-          {facts.map((fact) => (
-            <div key={fact.n} className="flex items-baseline gap-3">
-              <span className="text-[11px] tracking-[0.14em] text-[#3b82f6]">{fact.n}</span>
-              <div className="min-w-0">
-                <p className="font-display text-sm font-semibold">{fact.title}</p>
-                <p className="text-xs text-[var(--mute)]">{fact.detail}</p>
+          {facts.map((fact, i) => (
+            <Reveal key={fact.n} delay={0.08 * i} y={20}>
+              <div className="flex items-baseline gap-3">
+                <span className="text-[11px] tracking-[0.14em] text-[#3b82f6]">{fact.n}</span>
+                <div className="min-w-0">
+                  <p className="font-display text-sm font-semibold">{fact.title}</p>
+                  <p className="text-xs text-[var(--mute)]">{fact.detail}</p>
+                </div>
               </div>
-            </div>
+            </Reveal>
           ))}
         </div>
       </div>

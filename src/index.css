@@ -74,10 +74,39 @@ section[id] {
     radial-gradient(560px 400px at 8% 88%, rgb(59 130 246 / 0.035), transparent 50%);
 }
 
+.waves::after {
+  content: "";
+  display: none;
+  position: absolute;
+  width: 28rem;
+  height: 28rem;
+  left: var(--mx, 72%);
+  top: var(--my, 16%);
+  translate: -50% -50%;
+  background: radial-gradient(circle, rgb(59 130 246 / 0.1), transparent 68%);
+}
+
+@media (pointer: fine) {
+  .waves::after {
+    display: block;
+  }
+}
+
 .waves svg {
   width: 100%;
   height: 100%;
   opacity: 0.22;
+}
+
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 70;
+  height: 2px;
+  width: 100%;
+  transform-origin: 0 50%;
+  background: #3b82f6;
 }
 
 .outline-name {
@@ -110,9 +139,79 @@ section[id] {
 }
 
 .card {
+  position: relative;
+  overflow: hidden;
   background: var(--card);
   border: 1px solid var(--line);
   border-radius: 22px;
+  transition:
+    transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.3s ease,
+    box-shadow 0.45s ease;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  border-color: rgb(59 130 246 / 0.55);
+  box-shadow: 0 24px 60px rgb(59 130 246 / 0.12);
+}
+
+.card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(115deg, transparent 35%, rgb(255 255 255 / 0.08) 50%, transparent 65%);
+  transform: translateX(-130%);
+  transition: transform 0.7s ease;
+}
+
+.card:hover::after {
+  transform: translateX(130%);
+}
+
+.chip {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  transition:
+    transform 0.25s ease,
+    border-color 0.25s ease,
+    color 0.25s ease,
+    background 0.25s ease;
+}
+
+.chip:hover {
+  transform: translateY(-2px);
+  border-color: #3b82f6;
+  color: #93c5fd;
+  background: rgb(59 130 246 / 0.08);
+}
+
+.btn-glow {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-glow::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(110deg, transparent 30%, rgb(255 255 255 / 0.28) 50%, transparent 70%);
+  transform: translateX(-120%);
+}
+
+.btn-glow:hover::after {
+  animation: shine 0.7s ease;
+}
+
+@keyframes shine {
+  to {
+    transform: translateX(120%);
+  }
+}
+
+.portrait-glow {
+  box-shadow: 0 0 0 1px var(--line), 0 20px 50px rgb(59 130 246 / 0.18);
 }
 
 .icon-tile {
@@ -129,8 +228,15 @@ section[id] {
 
 @media (prefers-reduced-motion: reduce) {
   .name-track,
-  .skill-track {
+  .skill-track,
+  .btn-glow::after,
+  .card::after {
     animation: none;
+  }
+
+  .card:hover,
+  .chip:hover {
+    transform: none;
   }
 }
 
