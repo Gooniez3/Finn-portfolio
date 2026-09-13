@@ -13,7 +13,7 @@ export function Experience() {
             text={'From computing fundamentals\nto AI-native products.'}
           />
           <p className="mt-4 max-w-xl text-[var(--mute)]">
-            Diploma, then Massey at 8.8 / 9. Then a shop till, a live AI app, and a booking system.
+            Diploma, then Massey at 8.8 / 9. Then a shop till, a live AI app, a booking system, and this site.
           </p>
         </Reveal>
         <div className="relative mt-12">

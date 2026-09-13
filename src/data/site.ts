@@ -129,6 +129,25 @@ export const projects = [
     image: '/work/dairy-flat.jpg',
     gallery: [] as string[],
   },
+  {
+    id: 'portfolio',
+    n: '04',
+    name: 'Finn Portfolio',
+    kicker: 'Personal site',
+    status: 'finn-portfolio-blush.vercel.app',
+    blurb: 'The site you are on — selected work in 3D, scroll motion, and Finn AI that answers from the real shipped systems.',
+    points: [
+      { label: 'Real case notes', text: 'CapyTech, StudyMate, and Dairy Flat Air with actual screenshots — not placeholder mockups.' },
+      { label: '3D work gallery', text: 'Coverflow on desktop, stacked cards on mobile. Selected shots stay uncropped.' },
+      { label: 'Finn AI', text: 'A drawer that answers from the POS, the AI app, the booking system, education, and GitHub.' },
+      { label: 'Motion, not noise', text: 'Scroll reveals, magnetic buttons, and a cursor spotlight — all off if you prefer reduced motion.' },
+    ],
+    stack: ['React', 'TypeScript', 'Vite', 'Tailwind CSS', 'Framer Motion', 'Lenis'],
+    repo: 'https://github.com/Gooniez3/Finn-portfolio',
+    live: 'https://finn-portfolio-blush.vercel.app',
+    image: '/work/finn-site.png',
+    gallery: [] as string[],
+  },
 ]
 
 export const experience = [
@@ -144,7 +163,7 @@ export const experience = [
     when: 'Projects',
     title: 'Software projects',
     place: 'Shipped systems',
-    body: 'Turned coursework into products people use — a shop till, a live AI learning workspace, and a regional airline booking platform, plus IoT and cloud work along the way.',
+    body: 'Turned coursework into products people use — a shop till, a live AI learning workspace, a regional airline booking platform, and this site, plus IoT and cloud work along the way.',
   },
   {
     n: '03',
@@ -165,7 +184,7 @@ export const experience = [
     when: '2025 — Present',
     title: 'Freelance development',
     place: 'Singapore',
-    body: 'Delivering real client work — including CapyTech POS, a production point-of-sale and retail system running daily on a computer accessories shop PC. StudyMate AI and Dairy Flat Air are live on the public internet.',
+    body: 'Delivering real client work — including CapyTech POS, a production point-of-sale and retail system running daily on a computer accessories shop PC. StudyMate AI, Dairy Flat Air, and this portfolio are live on the public internet.',
   },
   {
     n: '06',
@@ -247,7 +266,7 @@ export const currently = [
 
 export const stats = [
   { label: 'Massey GPA', value: '8.8/9' },
-  { label: 'Shipped products', value: '3' },
+  { label: 'Shipped products', value: '4' },
   { label: 'IBM certificates', value: '2' },
 ]
 

@@ -4,7 +4,7 @@ const knowledge: Entry[] = [
   {
     keys: ['who', 'about', 'himself', 'bio', 'introduce', 'introduction', 'finn', 'name', 'saw', 'htoo'],
     answer:
-      "Saw Lwin Htoo — friends call him Finn. He's a full-stack developer in Singapore. He builds products from idea to production: thoughtful interfaces, scalable backends, databases, cloud, and AI-powered features. He's a continuous learner who uses AI alongside engineering to turn ideas into useful software. Proof: CapyTech POS in a real shop, StudyMate AI at studymateai.app, and Dairy Flat Air on Vercel.",
+      "Saw Lwin Htoo — friends call him Finn. He's a full-stack developer in Singapore. He builds products from idea to production: thoughtful interfaces, scalable backends, databases, cloud, and AI-powered features. He's a continuous learner who uses AI alongside engineering to turn ideas into useful software. Proof: CapyTech POS in a real shop, StudyMate AI at studymateai.app, Dairy Flat Air on Vercel, and this site at finn-portfolio-blush.vercel.app.",
   },
   {
     keys: ['hire', 'job', 'role', 'fit', 'why', 'recruiter', 'strength', 'opportunity', 'open'],
@@ -37,6 +37,11 @@ const knowledge: Entry[] = [
       "Dairy Flat Air is a live regional airline booking app: dairy-flat-air-booking.vercel.app. Next.js + TypeScript + MongoDB Atlas. It owns its own timetable (Dairy Flat to Sydney, Rotorua, Great Barrier, Chatham Islands, Lake Tekapo). Search explains why a date fails — no service, sold out, outside horizon — then suggests the next flight. Schedules use IANA timezones so daylight saving doesn't silently shift times. Rolling schedule generation is idempotent. Customers look up bookings with a reference + last name, no account required. Repo: github.com/Gooniez3/dairy-flat-air-booking.",
   },
   {
+    keys: ['portfolio', 'this site', 'personal site', 'finn-portfolio', 'website'],
+    answer:
+      "This site is his personal portfolio, live at finn-portfolio-blush.vercel.app. React, TypeScript, Vite, Tailwind, Framer Motion, and Lenis. It shows the shipped work in a 3D coverflow, with case notes from the real systems, and Finn AI — this chat — answering from those products, education, and GitHub. Repo: github.com/Gooniez3/Finn-portfolio.",
+  },
+  {
     keys: ['educat', 'university', 'massey', 'degree', 'bachelor', 'school', 'cs', 'diploma', 'psb', 'gpa', 'grade'],
     answer:
       "Diploma in InfoComm Technology at PSB Academy, awarded January 2025. Then a Bachelor of Information Sciences at Massey University — double major in Computer Science and Information Technology — 8.8 / 9 GPA on the NZ grading system, conferred August 2026. That's the academic base; the portfolio is the proof he turned it into shipped products.",
@@ -49,7 +54,7 @@ const knowledge: Entry[] = [
   {
     keys: ['github', 'repo', 'code', 'gooniez'],
     answer:
-      "GitHub is github.com/Gooniez3. Public repos: capytech-pos, studymate-ai, dairy-flat-air-booking, and his profile README. That's the best place to read how the systems actually work.",
+      "GitHub is github.com/Gooniez3. Public repos: capytech-pos, studymate-ai, dairy-flat-air-booking, Finn-portfolio, and his profile README. That's the best place to read how the systems actually work.",
   },
   {
     keys: ['linkedin', 'connect', 'network'],
@@ -64,7 +69,7 @@ const knowledge: Entry[] = [
   {
     keys: ['experience', 'freelance', 'work', 'client', 'job history'],
     answer:
-      "He's currently shipping as a freelance full-stack developer. The standout client system is CapyTech POS, in daily use at a computer accessories shop. Alongside that he built and deployed StudyMate AI and Dairy Flat Air. Path: PSB diploma → Massey BInfSc at 8.8/9 → client and live products. He's looking at full-time software engineering roles as well as freelance product work.",
+      "He's currently shipping as a freelance full-stack developer. The standout client system is CapyTech POS, in daily use at a computer accessories shop. Alongside that he built and deployed StudyMate AI, Dairy Flat Air, and this portfolio. Path: PSB diploma → Massey BInfSc at 8.8/9 → client and live products. He's looking at full-time software engineering roles as well as freelance product work.",
   },
 ]
 
@@ -83,5 +88,5 @@ export function answerFinn(question: string) {
     if (score > 0 && (!best || score > best.score)) best = { score, answer: item.answer }
   }
   if (best) return best.answer
-  return "I can brief you on Saw (Finn): skills, CapyTech POS, StudyMate AI, Dairy Flat Air, Massey education, IBM certs, GitHub, LinkedIn, or whether he's a fit for a role. What do you want to know?"
+  return "I can brief you on Saw (Finn): skills, CapyTech POS, StudyMate AI, Dairy Flat Air, this portfolio, Massey education, IBM certs, GitHub, LinkedIn, or whether he's a fit for a role. What do you want to know?"
 }

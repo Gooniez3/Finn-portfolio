@@ -13,6 +13,7 @@ const live = [
   { label: 'CapyTech POS', detail: 'Live on a shop PC' },
   { label: 'StudyMate AI', detail: 'studymateai.app', href: 'https://studymateai.app' },
   { label: 'Dairy Flat Air', detail: 'Live on Vercel', href: 'https://dairy-flat-air-booking.vercel.app' },
+  { label: 'Finn Portfolio', detail: 'finn-portfolio-blush.vercel.app', href: 'https://finn-portfolio-blush.vercel.app' },
 ]
 
 export function Footer() {

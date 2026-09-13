@@ -23,7 +23,7 @@ export function Work() {
             className="mt-3 font-display text-4xl font-bold tracking-[-0.04em] md:text-6xl"
             text="Shipped products"
           />
-          <p className="mt-3 max-w-xl text-[var(--mute)]">Three systems with users. Not a gallery of demos.</p>
+          <p className="mt-3 max-w-xl text-[var(--mute)]">Four shipped builds. Not a gallery of demos.</p>
         </Reveal>
 
         <div className="mt-10 space-y-8 md:hidden">
@@ -71,10 +71,10 @@ export function Work() {
                     height: selected ? '100%' : '78%',
                     borderColor: 'var(--line)',
                     background: 'var(--bg)',
-                    transform: `translate(-50%, -50%) translateX(${offset * 320}px) rotateY(${offset * -14}deg) translateZ(${selected ? 48 : -160}px) scale(${1 - abs * 0.1})`,
+                    transform: `translate(-50%, -50%) translateX(${offset * 250}px) rotateY(${offset * -12}deg) translateZ(${selected ? 48 : -160}px) scale(${1 - abs * 0.1})`,
                     zIndex: 20 - abs,
-                    opacity: abs > 2 ? 0 : selected ? 1 : 0.72,
-                    pointerEvents: abs > 2 ? 'none' : 'auto',
+                    opacity: abs > 3 ? 0 : selected ? 1 : 0.72,
+                    pointerEvents: abs > 3 ? 'none' : 'auto',
                     transition: 'transform 0.55s cubic-bezier(0.16,1,0.3,1), width 0.55s cubic-bezier(0.16,1,0.3,1), height 0.55s cubic-bezier(0.16,1,0.3,1), opacity 0.4s ease',
                   }}
                 >
