@@ -26,17 +26,64 @@ export function Work() {
           <p className="mt-3 max-w-xl text-[var(--mute)]">Four shipped builds. Not a gallery of demos.</p>
         </Reveal>
 
-        <div className="mt-10 space-y-8 md:hidden">
-          {projects.map((item, i) => (
-            <Reveal key={item.id} delay={i * 0.08} y={40}>
-              <article className="card overflow-hidden">
-                <div className="bg-[var(--bg)] px-2 pt-2">
-                  <img src={item.image} alt={item.name} className="aspect-[16/9] w-full object-contain" />
-                </div>
-                <ProjectCopy item={item} compact />
-              </article>
-            </Reveal>
-          ))}
+        <div className="mt-8 md:hidden">
+          <AnimatePresence mode="wait">
+            <motion.article
+              key={project.id}
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.25 }}
+              className="overflow-hidden rounded-2xl border"
+              style={{ borderColor: 'var(--line)', background: 'var(--card)' }}
+            >
+              <div className="bg-[var(--bg)] px-2 pt-2">
+                <img src={project.image} alt={project.name} className="mx-auto h-40 w-full object-contain" />
+              </div>
+              <ProjectCopy item={project} compact />
+            </motion.article>
+          </AnimatePresence>
+          <div className="mt-4 flex items-center justify-center gap-3">
+            <button
+              type="button"
+              aria-label="Previous project"
+              onClick={() => {
+                setActive((i) => (i - 1 + projects.length) % projects.length)
+                setPaused(true)
+              }}
+              className="grid h-10 w-10 place-items-center rounded-full border text-lg"
+              style={{ borderColor: 'var(--line)' }}
+            >
+              ‹
+            </button>
+            <div className="flex gap-2">
+              {projects.map((item, i) => (
+                <button
+                  key={item.id}
+                  type="button"
+                  aria-label={item.name}
+                  onClick={() => {
+                    setActive(i)
+                    setPaused(true)
+                  }}
+                  className="h-2 w-2 rounded-full"
+                  style={{ background: i === active ? 'var(--ink)' : 'var(--line)' }}
+                />
+              ))}
+            </div>
+            <button
+              type="button"
+              aria-label="Next project"
+              onClick={() => {
+                setActive((i) => (i + 1) % projects.length)
+                setPaused(true)
+              }}
+              className="grid h-10 w-10 place-items-center rounded-full border text-lg"
+              style={{ borderColor: 'var(--line)' }}
+            >
+              ›
+            </button>
+          </div>
         </div>
 
         <div
@@ -122,12 +169,12 @@ function ProjectCopy({
   compact?: boolean
 }) {
   return (
-    <div className={compact ? 'p-5' : 'mx-auto mt-12 max-w-4xl text-center'}>
-      <p className="text-[11px] font-semibold tracking-[0.2em] text-[#3b82f6] uppercase">{item.kicker}</p>
+    <div className={compact ? 'p-4' : 'mx-auto mt-12 max-w-4xl text-center'}>
+      <p className={`font-semibold tracking-[0.2em] text-[#3b82f6] uppercase ${compact ? 'text-[10px]' : 'text-[11px]'}`}>{item.kicker}</p>
       <h3
         className={
           compact
-            ? 'mt-2 font-display text-2xl font-bold tracking-[-0.03em]'
+            ? 'mt-1.5 font-display text-xl font-bold tracking-[-0.03em]'
             : 'mt-3 font-display text-5xl font-bold tracking-[-0.05em] text-balance md:text-6xl'
         }
       >
@@ -136,33 +183,34 @@ function ProjectCopy({
       <p
         className={
           compact
-            ? 'mt-3 text-[15px] leading-7 text-[var(--ink)]'
+            ? 'mt-2 text-[13px] leading-5 text-[var(--ink)]'
             : 'mx-auto mt-5 max-w-2xl text-xl leading-8 font-medium text-balance text-[var(--ink)] md:text-[22px] md:leading-9'
         }
       >
         {item.blurb}
       </p>
-      <ul className={compact ? 'mt-5 grid gap-3 text-left' : 'mt-9 grid gap-3 text-left sm:grid-cols-2'}>
+      <ul className={compact ? 'mt-3 space-y-2 text-left' : 'mt-9 grid gap-3 text-left sm:grid-cols-2'}>
         {item.points.map((point) => (
           <motion.li
             key={point.label}
-            className="card px-4 py-4"
-            whileHover={{ y: -4 }}
+            className={compact ? 'rounded-xl border px-3 py-2' : 'card px-4 py-4'}
+            style={compact ? { borderColor: 'var(--line)' } : undefined}
+            whileHover={compact ? undefined : { y: -4 }}
             transition={{ type: 'spring', stiffness: 280, damping: 20 }}
           >
-            <p className="text-[11px] font-bold tracking-[0.16em] text-[#3b82f6] uppercase">{point.label}</p>
-            <p className="mt-2 text-[15px] leading-6 text-[var(--ink)]">{point.text}</p>
+            <p className={`font-bold tracking-[0.16em] text-[#3b82f6] uppercase ${compact ? 'text-[10px]' : 'text-[11px]'}`}>{point.label}</p>
+            <p className={compact ? 'mt-0.5 text-[13px] leading-5 text-[var(--ink)]' : 'mt-2 text-[15px] leading-6 text-[var(--ink)]'}>{point.text}</p>
           </motion.li>
         ))}
       </ul>
-      <div className={compact ? 'mt-4 flex flex-wrap gap-2' : 'mt-7 flex flex-wrap justify-center gap-2'}>
+      <div className={compact ? 'mt-3 flex flex-wrap gap-1.5' : 'mt-7 flex flex-wrap justify-center gap-2'}>
         {item.stack.map((tag) => (
-          <span key={tag} className="chip px-3 py-1 text-[11px] font-medium tracking-[0.08em] uppercase">
+          <span key={tag} className={`chip font-medium tracking-[0.08em] uppercase ${compact ? 'px-2 py-0.5 text-[10px]' : 'px-3 py-1 text-[11px]'}`}>
             {tag}
           </span>
         ))}
       </div>
-      <div className={compact ? 'mt-4 flex flex-wrap gap-3 text-sm font-semibold' : 'mt-6 flex justify-center gap-6 text-sm font-semibold'}>
+      <div className={compact ? 'mt-3 flex flex-wrap gap-3 text-sm font-semibold' : 'mt-6 flex justify-center gap-6 text-sm font-semibold'}>
         {item.live && (
           <a href={item.live} target="_blank" rel="noreferrer" className="text-[#3b82f6] underline underline-offset-4">
             Open live →

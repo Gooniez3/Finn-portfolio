@@ -245,4 +245,9 @@ section[id] {
   body {
     overflow-x: clip;
   }
+
+  .card:hover {
+    transform: none;
+    box-shadow: none;
+  }
 }

@@ -138,7 +138,7 @@ export const projects = [
     blurb: 'The site you are on — selected work in 3D, scroll motion, and Finn AI that answers from the real shipped systems.',
     points: [
       { label: 'Real case notes', text: 'CapyTech, StudyMate, and Dairy Flat Air with actual screenshots — not placeholder mockups.' },
-      { label: '3D work gallery', text: 'Coverflow on desktop, stacked cards on mobile. Selected shots stay uncropped.' },
+      { label: '3D work gallery', text: 'Coverflow on desktop, one project at a time on mobile. Selected shots stay uncropped.' },
       { label: 'Finn AI', text: 'A drawer that answers from the POS, the AI app, the booking system, education, and GitHub.' },
       { label: 'Motion, not noise', text: 'Scroll reveals, magnetic buttons, and a cursor spotlight — all off if you prefer reduced motion.' },
     ],
