@@ -52,23 +52,20 @@ export function SocialIcons({ className = '' }: { className?: string }) {
   )
 }
 
-export function ContactLinks() {
+export function ContactInline({ className = '' }: { className?: string }) {
   return (
-    <div className="mt-8 grid gap-3">
+    <div className={`flex flex-col items-center gap-3 sm:flex-row sm:flex-wrap sm:justify-center sm:gap-x-6 ${className}`}>
       {links.map(({ href, label, detail, Icon, external }) => (
         <a
           key={label}
           href={href}
-          className="flex min-h-14 items-center gap-4 rounded-2xl border px-4 py-3 transition hover:border-[#3b82f6]"
-          style={{ borderColor: 'var(--line)', background: 'var(--card)' }}
+          className="inline-flex items-center gap-2 text-sm transition hover:text-[#3b82f6]"
           {...(external ? { target: '_blank', rel: 'noreferrer' } : {})}
         >
-          <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full border" style={{ borderColor: 'var(--line)' }}>
-            <Icon />
-          </span>
-          <span className="min-w-0">
+          <Icon />
+          <span className="text-left">
             <span className="block text-[10px] tracking-[0.16em] text-[var(--mute)] uppercase">{label}</span>
-            <span className="mt-0.5 block truncate text-sm font-medium">{detail}</span>
+            <span className="font-medium">{detail}</span>
           </span>
         </a>
       ))}

@@ -82,6 +82,8 @@ export const projects = [
     kicker: 'Current · Singapore buses',
     status: 'Next.js and Expo · one API',
     blurb: 'Live arrivals, journeys, and Ask BusFlow — an assistant other Singapore bus apps leave out.',
+    summary:
+      'Live arrivals, journeys, and Ask BusFlow — an assistant other Singapore bus apps leave out. Wait times come from LTA DataMall through one worker, and a missing cache is no live wait, not a guessed minute. Next.js and Expo share one FastAPI, saved stops stay on the device, and there is no account.',
     points: [
       { label: 'Ask BusFlow', text: 'Plain-language questions. Tools read the same stops, arrivals, and journeys, then the reply shows tappable cards.' },
       { label: 'No invented times', text: 'Minutes come from LTA DataMall through one worker. A missing cache is no live wait, not a guessed minute.' },
@@ -101,6 +103,8 @@ export const projects = [
     kicker: 'Desktop · network diagnostics',
     status: 'Windows app · v1.0',
     blurb: 'Ping, DNS, traceroute, ports, and LAN discovery in one window, explained from the measurements.',
+    summary:
+      'Ping, DNS, traceroute, ports, and LAN discovery live in one window, explained from the measurements. A saved run is described by rules from those measurements — it works offline and does not call a language model. Optional SQLite history stays on the machine, with no account and no cloud sync.',
     points: [
       { label: 'One window', text: 'Dashboard, monitor, diagnostics, and LAN discovery instead of separate ping and traceroute tools.' },
       { label: 'Local history', text: 'Optional SQLite sessions on the machine. No account and no cloud sync.' },
@@ -120,6 +124,8 @@ export const projects = [
     kicker: 'Live client · computer accessories shop',
     status: 'In production on the shop PC',
     blurb: 'Checkout, variants, inventory, invoices — on the shop PC, not a cloud SaaS.',
+    summary:
+      'Checkout, variants, inventory, and invoices run on the shop PC, not as a cloud SaaS. The server recomputes prices from PostgreSQL, and row-level stock locks plus idempotent charges stop a retry from double-selling. A phone on shop Wi-Fi scans barcodes to the till, with USB backup of Postgres and product photos.',
     points: [
       { label: 'Database prices', text: 'Server recomputes prices from PostgreSQL. The browser never chooses the sell price.' },
       { label: 'No double-sell', text: 'Row-level stock locks and idempotent charges. A retry cannot double-sell.' },
@@ -139,6 +145,8 @@ export const projects = [
     kicker: 'Live product',
     status: 'studymateai.app',
     blurb: 'LangGraph picks the job — chat, PDF RAG, search, planner, quiz — then streams the answer.',
+    summary:
+      'LangGraph picks the job — chat, PDF RAG, search, planner, or quiz — then streams the answer. Page-aware PDF chunks, Cloudflare embeddings, and PostgreSQL pgvector keep the reply tied to the source page. Groq, Gemini, or OpenRouter stream the tokens, with Google sign-in and saved chats.',
     points: [
       { label: 'LangGraph routing', text: 'Picks a workflow: chat, PDF RAG, web search, planner, exam revision, quiz, or assignment.' },
       { label: 'RAG with pages', text: 'Page-aware PDF chunks, Cloudflare embeddings, and PostgreSQL pgvector.' },
@@ -158,6 +166,8 @@ export const projects = [
     kicker: 'Live booking platform',
     status: 'dairy-flat-air-booking.vercel.app',
     blurb: 'Its own timetable, seats, and fares. Search, book, look up, and cancel — no account.',
+    summary:
+      'Search, book, look up, and cancel on its own timetable, seats, and fares, with no account. If a flight is missing, sold out, or past the horizon, it suggests the next one, and IANA timezones keep Auckland, Sydney, and the Chatham Islands correct across daylight saving. One-way and return fares include GST, and a booking reference can cancel without wiping other bookings.',
     points: [
       { label: 'Honest search', text: 'No service, sold out, or outside the horizon — then it suggests the next flight.' },
       { label: 'Real timezones', text: 'IANA timezones so Auckland, Sydney, and Chatham Islands stay correct across daylight saving.' },
@@ -177,6 +187,8 @@ export const projects = [
     kicker: 'Personal site',
     status: 'finn-portfolio-blush.vercel.app',
     blurb: 'The site you are on — selected work in 3D, scroll motion, and Finn AI that answers from the real shipped systems.',
+    summary:
+      'The site you are on — selected work in 3D, with Finn AI answering from the real shipped systems. The case notes use actual screenshots from the bus app, NetScope, the shop till, StudyMate, and Dairy Flat Air. Motion stays on for the coverflow and turns off if you prefer reduced motion.',
     points: [
       { label: 'Real case notes', text: 'SG BusFlow, NetScope, CapyTech, StudyMate, and Dairy Flat Air with actual screenshots — not placeholder mockups.' },
       { label: '3D work gallery', text: 'Coverflow on every screen. Selected shots stay uncropped.' },
@@ -293,21 +305,21 @@ export const capabilities = [
     n: '01',
     kicker: 'Full-stack',
     title: 'Product, not a layer',
-    body: 'Building and shipping functional systems end to end — React/Next on the front, Node or Next APIs underneath, Postgres or Mongo as the record — with a focus on money, stock, bookings, and the messy production details.',
+    body: 'React or Next on the front, Node or Next APIs underneath, Postgres or Mongo as the record — including money, stock, bookings, and the production details.',
     tags: ['React', 'Next.js', 'TypeScript', 'Express', 'PostgreSQL', 'MongoDB', 'Prisma', 'Socket.IO'],
   },
   {
     n: '02',
     kicker: 'AI engineering',
     title: 'Agents with a job',
-    body: 'LangGraph workflows, PDF RAG with page-aware chunks, and real token streaming. StudyMate is live — not a chatbot glued onto a form.',
+    body: 'LangGraph workflows, page-aware PDF RAG, and real token streaming. StudyMate is the live product.',
     tags: ['LangGraph', 'RAG', 'pgvector', 'Groq', 'Gemini', 'Cloudflare'],
   },
   {
     n: '03',
     kicker: 'Production',
     title: 'Used in the real world',
-    body: 'A shop till that cannot double-sell. A booking system that does not lie about timezones. Idempotent charges, stock locks, USB backup, IANA schedules.',
+    body: 'A shop till that cannot double-sell, and bookings that stay honest across timezones, locks, and retries.',
     tags: ['Idempotency', 'Row locks', 'IANA TZ', 'Vercel', 'Docker'],
   },
 ]

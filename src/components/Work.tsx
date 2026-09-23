@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { AnimatePresence, motion } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { projects } from '../data/site'
 import { Headline, Kicker, Reveal } from './Reveal'
 
@@ -31,13 +31,15 @@ export function Work() {
     return () => window.clearInterval(id)
   }, [paused])
 
-  const step = (dir: number) => {
-    setActive((i) => (i + dir + projects.length) % projects.length)
+  const go = (index: number) => {
+    setActive((index + projects.length) % projects.length)
     setPaused(true)
   }
 
+  const step = (dir: number) => go(active + dir)
+
   return (
-    <section id="work" className="relative overflow-x-clip scroll-mt-24 px-5 py-12 md:px-8 md:py-24" style={{ overflowAnchor: 'none' }}>
+    <section id="work" className="relative overflow-x-clip scroll-mt-24 px-5 py-12 md:px-8 md:py-20" style={{ overflowAnchor: 'none' }}>
       <div className="mx-auto max-w-6xl">
         <Reveal>
           <Kicker>Selected work</Kicker>
@@ -49,140 +51,130 @@ export function Work() {
         </Reveal>
 
         <div
-          className="mt-8 md:mt-12"
+          className="mt-6 grid items-start gap-5 md:mt-10 md:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)] md:gap-12"
           onMouseEnter={() => wide && setPaused(true)}
           onMouseLeave={() => wide && setPaused(false)}
-          onPointerDown={(event) => {
-            if (event.pointerType === 'mouse') return
-            dragX.current = event.clientX
-          }}
-          onPointerUp={(event) => {
-            if (dragX.current == null) return
-            const delta = event.clientX - dragX.current
-            dragX.current = null
-            if (delta > 36) step(-1)
-            else if (delta < -36) step(1)
-          }}
         >
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="relative mx-auto h-[230px] max-w-6xl [transform-style:preserve-3d] sm:h-[280px] md:h-[400px] lg:h-[440px]"
-            style={{ perspective: wide ? '1200px' : '900px' }}
+          <div className="order-2 md:order-1" style={{ overflowAnchor: 'none' }}>
+            <div className="grid">
+              {projects.map((item) => {
+                const on = item.id === project.id
+                return (
+                  <article
+                    key={item.id}
+                    className="col-start-1 row-start-1"
+                    style={{ visibility: on ? 'visible' : 'hidden', opacity: on ? 1 : 0, transition: 'opacity 0.28s ease' }}
+                    aria-hidden={!on}
+                    {...(!on ? { inert: true } : {})}
+                  >
+                    <ProjectCopy item={item} />
+                  </article>
+                )
+              })}
+            </div>
+          </div>
+
+          <div
+            className="order-1 md:order-2"
+            onPointerDown={(event) => {
+              if (event.pointerType === 'mouse') return
+              dragX.current = event.clientX
+            }}
+            onPointerUp={(event) => {
+              if (dragX.current == null) return
+              const delta = event.clientX - dragX.current
+              dragX.current = null
+              if (delta > 36) step(-1)
+              else if (delta < -36) step(1)
+            }}
           >
-            <div className="pointer-events-none absolute top-1/2 left-1/2 h-40 w-40 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#3b82f6]/20 blur-3xl md:h-56 md:w-56" />
-            {projects.map((item, i) => {
-              const offset = ringOffset(i, active, projects.length)
-              const abs = Math.abs(offset)
-              const selected = abs === 0
-              const spread = wide ? 250 : 78
-              const depth = wide ? 160 : 70
-              const hidden = abs > (wide ? 2 : 1)
-              return (
-                <button
-                  key={item.id}
-                  type="button"
-                  aria-label={item.name}
-                  onClick={() => {
-                    setActive(i)
-                    setPaused(true)
-                  }}
-                  className="absolute top-1/2 left-1/2 overflow-hidden rounded-2xl border shadow-2xl"
-                  style={{
-                    width: selected ? (wide ? 'min(58%, 640px)' : '70%') : wide ? 'min(46%, 400px)' : '54%',
-                    height: selected ? '100%' : '76%',
-                    borderColor: 'var(--line)',
-                    background: 'var(--bg)',
-                    transform: `translate(-50%, -50%) translateX(${offset * spread}px) rotateY(${offset * (wide ? -12 : -22)}deg) translateZ(${selected ? 36 : -depth}px) scale(${1 - abs * 0.08})`,
-                    zIndex: 20 - abs,
-                    opacity: hidden ? 0 : selected ? 1 : 0.7,
-                    pointerEvents: hidden ? 'none' : 'auto',
-                    transition: 'transform 0.55s cubic-bezier(0.16,1,0.3,1), width 0.55s cubic-bezier(0.16,1,0.3,1), height 0.55s cubic-bezier(0.16,1,0.3,1), opacity 0.4s ease',
-                  }}
-                >
-                  <img src={item.image} alt="" className="h-full w-full object-contain" />
-                </button>
-              )
-            })}
-          </motion.div>
-
-          <div className="relative mt-4 h-[132px] md:hidden" style={{ overflowAnchor: 'none' }}>
-            <AnimatePresence initial={false}>
-              <motion.div
-                key={project.id}
-                className="absolute inset-0"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.25 }}
-              >
-                <p className="text-[10px] font-semibold tracking-[0.2em] text-[#3b82f6] uppercase">{project.kicker}</p>
-                <h3 className="mt-1 font-display text-xl font-bold tracking-[-0.03em]">{project.name}</h3>
-                <p className="mt-1 line-clamp-2 text-[13px] leading-5 text-[var(--mute)]">{project.blurb}</p>
-                <div className="mt-2 flex gap-4 text-sm font-semibold">
-                  {project.live && (
-                    <a href={project.live} target="_blank" rel="noreferrer" className="text-[#3b82f6] underline underline-offset-4">
-                      Open live →
-                    </a>
-                  )}
-                  <a href={project.repo} target="_blank" rel="noreferrer" className="underline underline-offset-4">
-                    GitHub →
-                  </a>
-                </div>
-              </motion.div>
-            </AnimatePresence>
-          </div>
-
-          <div className="mt-3 hidden md:block" style={{ overflowAnchor: 'none' }}>
-            <AnimatePresence mode="wait" initial={false}>
-              <motion.div
-                key={project.id}
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -12 }}
-                transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-              >
-                <ProjectCopy item={project} />
-              </motion.div>
-            </AnimatePresence>
-          </div>
-
-          <div className="mt-2 flex items-center justify-center gap-3 md:mt-8">
-            <button
-              type="button"
-              aria-label="Previous project"
-              onClick={() => step(-1)}
-              className="grid h-10 w-10 place-items-center rounded-full border text-lg md:hidden"
-              style={{ borderColor: 'var(--line)' }}
+            <div className="relative">
+            <motion.div
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+              className="relative mx-auto h-[220px] max-w-6xl [transform-style:preserve-3d] sm:h-[260px] md:h-[360px]"
+              style={{ perspective: wide ? '1100px' : '900px' }}
             >
-              ‹
-            </button>
-            <div className="flex gap-2">
+              <div className="pointer-events-none absolute top-1/2 left-1/2 h-40 w-40 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#3b82f6]/20 blur-3xl md:h-52 md:w-52" />
+              {projects.map((item, i) => {
+                const offset = ringOffset(i, active, projects.length)
+                const abs = Math.abs(offset)
+                const selected = abs === 0
+                const spread = wide ? 168 : 86
+                const depth = wide ? 110 : 64
+                const hidden = abs > 1
+                return (
+                  <button
+                    key={item.id}
+                    type="button"
+                    aria-label={item.name}
+                    aria-current={selected ? 'true' : undefined}
+                    onClick={() => go(i)}
+                    className="absolute top-1/2 left-1/2 cursor-pointer overflow-hidden rounded-2xl border shadow-2xl"
+                    style={{
+                      width: selected ? (wide ? '62%' : '68%') : wide ? '48%' : '52%',
+                      height: selected ? '100%' : '78%',
+                      borderColor: 'var(--line)',
+                      background: 'var(--bg)',
+                      transform: `translate(-50%, -50%) translateX(${offset * spread}px) rotateY(${offset * (wide ? -16 : -24)}deg) translateZ(${selected ? 40 : -depth}px) scale(${1 - abs * 0.06})`,
+                      zIndex: 20 - abs,
+                      opacity: hidden ? 0 : selected ? 1 : 0.78,
+                      pointerEvents: 'none',
+                      transition:
+                        'transform 0.55s cubic-bezier(0.16,1,0.3,1), width 0.55s cubic-bezier(0.16,1,0.3,1), height 0.55s cubic-bezier(0.16,1,0.3,1), opacity 0.4s ease',
+                    }}
+                  >
+                    <img src={item.image} alt="" className="pointer-events-none h-full w-full object-contain" />
+                  </button>
+                )
+              })}
+            </motion.div>
+              <button
+                type="button"
+                aria-label={projects[(active - 1 + projects.length) % projects.length].name}
+                onClick={() => step(-1)}
+                className="absolute inset-y-0 left-0 z-30 w-[28%]"
+              />
+              <button
+                type="button"
+                aria-label={projects[(active + 1) % projects.length].name}
+                onClick={() => step(1)}
+                className="absolute inset-y-0 right-0 z-30 w-[28%]"
+              />
+              <button
+                type="button"
+                aria-label="Previous project"
+                onClick={() => step(-1)}
+                className="absolute top-1/2 left-0 z-40 grid h-10 w-10 -translate-y-1/2 place-items-center rounded-full border bg-[var(--bg)]/85 text-lg backdrop-blur-sm"
+                style={{ borderColor: 'var(--line)' }}
+              >
+                ‹
+              </button>
+              <button
+                type="button"
+                aria-label="Next project"
+                onClick={() => step(1)}
+                className="absolute top-1/2 right-0 z-40 grid h-10 w-10 -translate-y-1/2 place-items-center rounded-full border bg-[var(--bg)]/85 text-lg backdrop-blur-sm"
+                style={{ borderColor: 'var(--line)' }}
+              >
+                ›
+              </button>
+            </div>
+
+            <div className="mt-3 flex justify-center gap-2">
               {projects.map((item, i) => (
                 <button
                   key={item.id}
                   type="button"
                   aria-label={item.name}
-                  onClick={() => {
-                    setActive(i)
-                    setPaused(true)
-                  }}
+                  onClick={() => go(i)}
                   className="h-2 w-2 rounded-full md:h-2.5 md:w-2.5"
                   style={{ background: i === active ? 'var(--ink)' : 'var(--line)' }}
                 />
               ))}
             </div>
-            <button
-              type="button"
-              aria-label="Next project"
-              onClick={() => step(1)}
-              className="grid h-10 w-10 place-items-center rounded-full border text-lg md:hidden"
-              style={{ borderColor: 'var(--line)' }}
-            >
-              ›
-            </button>
           </div>
         </div>
       </div>
@@ -192,44 +184,26 @@ export function Work() {
 
 function ProjectCopy({ item }: { item: (typeof projects)[number] }) {
   return (
-    <div className="mx-auto mt-12 max-w-4xl text-center">
-      <p className="text-[11px] font-semibold tracking-[0.2em] text-[#3b82f6] uppercase">{item.kicker}</p>
-      <h3 className="mt-3 font-display text-5xl font-bold tracking-[-0.05em] text-balance md:text-6xl">{item.name}</h3>
-      <p className="mx-auto mt-5 max-w-2xl text-xl leading-8 font-medium text-balance text-[var(--ink)] md:text-[22px] md:leading-9">{item.blurb}</p>
-      {item.gallery.length > 0 && (
-        <div className="mx-auto mt-6 grid max-w-3xl grid-cols-2 gap-3">
-          {item.gallery.map((src) => (
-            <img
-              key={src}
-              src={src}
-              alt={`${item.name} screenshot`}
-              className="h-40 w-full rounded-xl object-contain md:h-48"
-              style={{ border: '1px solid var(--line)', background: 'var(--bg)' }}
-            />
-          ))}
-        </div>
-      )}
-      <ul className="mt-9 grid gap-3 text-left sm:grid-cols-2">
+    <div>
+      <p className="text-[10px] font-semibold tracking-[0.2em] text-[#3b82f6] uppercase md:text-[11px]">{item.kicker}</p>
+      <h3 className="mt-1 font-display text-2xl font-bold tracking-[-0.04em] md:mt-2 md:text-4xl">{item.name}</h3>
+      <p className="mt-2 text-[13px] leading-5 text-[var(--mute)] md:mt-3 md:text-[15px] md:leading-7">{item.summary}</p>
+      <ul className="mt-3 hidden space-y-2 md:block">
         {item.points.map((point) => (
-          <motion.li
-            key={point.label}
-            className="card px-4 py-4"
-            whileHover={{ y: -4 }}
-            transition={{ type: 'spring', stiffness: 280, damping: 20 }}
-          >
-            <p className="text-[11px] font-bold tracking-[0.16em] text-[#3b82f6] uppercase">{point.label}</p>
-            <p className="mt-2 text-[15px] leading-6 text-[var(--ink)]">{point.text}</p>
-          </motion.li>
+          <li key={point.label} className="text-[13px] leading-5">
+            <span className="font-semibold tracking-[0.12em] text-[#3b82f6] uppercase">{point.label}. </span>
+            <span className="text-[var(--ink)]">{point.text}</span>
+          </li>
         ))}
       </ul>
-      <div className="mt-7 flex flex-wrap justify-center gap-2">
+      <div className="mt-3 hidden flex-wrap gap-1.5 md:flex">
         {item.stack.map((tag) => (
-          <span key={tag} className="chip px-3 py-1 text-[11px] font-medium tracking-[0.08em] uppercase">
+          <span key={tag} className="text-[11px] tracking-[0.08em] text-[var(--mute)] uppercase">
             {tag}
           </span>
         ))}
       </div>
-      <div className="mt-6 flex justify-center gap-6 text-sm font-semibold">
+      <div className="mt-3 flex gap-5 text-sm font-semibold">
         {item.live && (
           <a href={item.live} target="_blank" rel="noreferrer" className="text-[#3b82f6] underline underline-offset-4">
             Open live →
