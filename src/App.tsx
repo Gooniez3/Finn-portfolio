@@ -9,7 +9,6 @@ import { Finn } from './components/Finn'
 import { Footer } from './components/Footer'
 import { Hero } from './components/Hero'
 import { Nav } from './components/Nav'
-import { Now } from './components/Now'
 import { Work } from './components/Work'
 import { ThemeProvider } from './context/theme'
 import { useLenis } from './hooks/useLenis'
@@ -55,7 +54,6 @@ function Shell() {
         <Nav onAsk={() => setFinnOpen(true)} />
         <main>
           <Hero onAsk={() => setFinnOpen(true)} />
-          <Now />
           <Work />
           <Capabilities />
           <About />

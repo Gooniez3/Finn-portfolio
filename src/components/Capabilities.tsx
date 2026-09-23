@@ -66,17 +66,17 @@ export function Capabilities() {
           ))}
         </div>
 
-        <div className="mt-12 grid gap-4 lg:grid-cols-3">
+        <div className="mt-8 grid gap-3 md:mt-12 md:gap-4 lg:grid-cols-3">
           {capabilities.map((card, i) => (
             <Reveal key={card.n} delay={i * 0.1} y={36}>
-              <article className="card p-5 md:p-6">
-                <div className="flex items-start justify-between gap-4">
-                  <p className="font-display text-3xl font-bold text-[var(--mute)]">{card.n}</p>
+              <article className="card p-4 md:p-6">
+                <div className="flex items-baseline justify-between gap-4">
+                  <p className="font-display text-lg font-bold text-[var(--mute)] md:text-3xl">{card.n}</p>
                   <p className="text-[10px] tracking-[0.18em] text-[var(--mute)] uppercase">{card.kicker}</p>
                 </div>
-                <h3 className="mt-4 font-display text-xl font-semibold">{card.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-[var(--mute)]">{card.body}</p>
-                <div className="mt-4 flex flex-wrap gap-2">
+                <h3 className="mt-2 font-display text-lg font-semibold md:mt-4 md:text-xl">{card.title}</h3>
+                <p className="mt-1.5 line-clamp-3 text-[13px] leading-5 text-[var(--mute)] md:mt-2 md:line-clamp-none md:text-sm md:leading-relaxed">{card.body}</p>
+                <div className="mt-3 flex flex-wrap gap-1.5 md:mt-4 md:gap-2">
                   {card.tags.map((tag) => (
                     <span
                       key={tag}

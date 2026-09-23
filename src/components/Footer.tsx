@@ -23,11 +23,35 @@ export function Footer() {
 
   return (
     <footer
-      className="relative overflow-hidden border-t px-5 pt-16 pb-[max(6.75rem,env(safe-area-inset-bottom))] md:px-8 md:pt-20 md:pb-12"
+      className="relative overflow-hidden border-t px-5 pt-8 pb-[max(5.5rem,env(safe-area-inset-bottom))] md:px-8 md:pt-20 md:pb-12"
       style={{ borderColor: 'var(--line)' }}
     >
       <div className="mx-auto max-w-6xl">
-        <div className="grid gap-10 border-b pb-12 sm:grid-cols-2 lg:grid-cols-4" style={{ borderColor: 'var(--line)' }}>
+        <div className="md:hidden">
+          <div className="flex flex-wrap gap-x-4 gap-y-2">
+            {nav.map((item) => (
+              <button key={item.id} type="button" onClick={() => scrollToId(item.id)} className="text-sm text-[var(--ink)]">
+                {item.label}
+              </button>
+            ))}
+          </div>
+          <div className="mt-4 flex gap-3">
+            {socials.map(({ href, label, Icon, external }) => (
+              <a
+                key={label}
+                href={href}
+                aria-label={label}
+                className="grid h-10 w-10 place-items-center rounded-full border"
+                style={{ borderColor: 'var(--line)' }}
+                {...(external ? { target: '_blank', rel: 'noreferrer' } : {})}
+              >
+                <Icon />
+              </a>
+            ))}
+          </div>
+        </div>
+
+        <div className="hidden gap-10 border-b pb-12 md:grid md:grid-cols-2 lg:grid-cols-4" style={{ borderColor: 'var(--line)' }}>
           <Reveal y={24} blur={false}>
             <p className="text-[11px] tracking-[0.2em] text-[var(--mute)] uppercase">Explore</p>
             <ul className="mt-4 space-y-3">
@@ -108,7 +132,7 @@ export function Footer() {
           </Reveal>
         </div>
 
-        <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+        <div className="mt-5 flex flex-col gap-3 md:mt-8 md:flex-row md:items-end md:justify-between">
           <div className="text-sm text-[var(--mute)]">
             <p>
               © {year} {profile.name}. Designed & built by {profile.handle}.
