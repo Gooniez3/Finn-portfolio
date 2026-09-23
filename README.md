@@ -2,7 +2,7 @@
 
 **A personal site for Saw Lwin Htoo (Finn) — shipped products, real case notes, and a recruiter-facing walkthrough of full-stack and AI work.**
 
-This is not a gallery of coursework demos. The site presents four builds with users or a public URL: a shop-computer POS, a live LangGraph learning product, a regional airline booking platform, and this site. Copy, screenshots, and Finn AI answers come from those systems rather than placeholder projects.
+This is not a gallery of coursework demos. The site presents six builds: SG BusFlow, NetScope, a shop-computer POS, a live LangGraph learning product, a regional airline booking platform, and this site. Copy, screenshots, and Finn AI answers come from those systems rather than placeholder projects.
 
 [![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=black)](https://react.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-6-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
@@ -17,16 +17,16 @@ This is not a gallery of coursework demos. The site presents four builds with us
 
 Recruiters and hiring managers should be able to scan who Finn is, what he has shipped, and how to reach him without hunting through a long resume. The site is a single Vite page with section anchors: identity first, then live products, capabilities, education, certificates, and contact.
 
-Work cards are the proof. CapyTech POS is a local-first till on a computer accessories shop PC — not a cloud SaaS. StudyMate AI is live at [studymateai.app](https://studymateai.app). Dairy Flat Air is live on Vercel. This repository is the public record of that work.
+Work cards are the proof. SG BusFlow is a Singapore bus app with live arrivals and Ask BusFlow. NetScope is a Windows desktop network diagnostic. CapyTech POS is a local-first till on a computer accessories shop PC — not a cloud SaaS. StudyMate AI is live at [studymateai.app](https://studymateai.app). Dairy Flat Air is live on Vercel. This repository is the public record of that work.
 
 ## Core features
 
 | Capability | What it provides |
 | --- | --- |
 | **Identity-first hero** | Name, role, focus, location, and CTAs before any decorative type. |
-| **Shipped work** | Four products with kickers, blurbs, engineering notes, stack chips, GitHub, and live links where they exist. |
+| **Shipped work** | Six products with kickers, blurbs, engineering notes, stack chips, GitHub, and live links where they exist. |
 | **3D work gallery** | Desktop coverflow with `perspective` / `rotateY`; stacked cards on mobile. Selected screenshots use `object-contain` so UI is not cropped. |
-| **Finn AI** | A drawer that answers from a local knowledge base — POS, StudyMate, Dairy Flat Air, education, GitHub, LinkedIn, and contact — not a hosted LLM. |
+| **Finn AI** | A drawer that answers from a local knowledge base — SG BusFlow, NetScope, POS, StudyMate, Dairy Flat Air, education, GitHub, LinkedIn, and contact — not a hosted LLM. |
 | **Capabilities** | Full-stack, AI engineering, and production notes tied to the same shipped systems. |
 | **Path and awards** | PSB diploma, Massey BInfSc (CS + IT, 8.8 / 9 GPA, conferred August 2026), IBM RAG & Agentic AI and DevOps PDFs. |
 | **Contact** | Email, GitHub, LinkedIn, and a form that opens the visitor’s mail app to `kokosaw804@gmail.com`. |
@@ -41,10 +41,16 @@ Work cards are the proof. CapyTech POS is a local-first till on a computer acces
 
 ### Shipped products
 
+| SG BusFlow | NetScope |
+| --- | --- |
+| ![SG BusFlow nearby stops](public/work/bus-nearby.jpg) | ![NetScope dashboard](public/work/net-dashboard.png) |
+
 | CapyTech POS | StudyMate AI | Dairy Flat Air |
 | --- | --- | --- |
 | ![CapyTech POS till](public/work/capy-till.png) | ![StudyMate AI](public/work/study-login.png) | ![Dairy Flat Air](public/work/dairy-flat.jpg) |
 
+- **SG BusFlow** — nearby stops, live minutes from LTA DataMall, walk-plus-bus journeys, and Ask BusFlow. Next.js and Expo share one FastAPI API. The assistant does not invent a time. Repo: [SG-BusFlow](https://github.com/Gooniez3/SG-BusFlow).
+- **NetScope** — ping, DNS, traceroute, TCP ports, and LAN discovery in one Windows desktop window, with optional SQLite history and a rule-based session explainer. Repo: [NetScope](https://github.com/Gooniez3/NetScope).
 - **CapyTech POS** — checkout, variants, inventory, invoices on the shop PC. Database prices, row-level stock locks, idempotent charges, phone barcode scanning on shop Wi-Fi, USB backup. Repo: [capytech-pos](https://github.com/Gooniez3/capytech-pos).
 - **StudyMate AI** — LangGraph routing, page-aware PDF RAG, streaming across Groq / Gemini / OpenRouter. Live: [studymateai.app](https://studymateai.app). Repo: [studymate-ai](https://github.com/Gooniez3/studymate-ai).
 - **Dairy Flat Air** — owned timetable, honest search, IANA timezones, idempotent schedule generation, booking lookup with no account. Live: [dairy-flat-air-booking.vercel.app](https://dairy-flat-air-booking.vercel.app). Repo: [dairy-flat-air-booking](https://github.com/Gooniez3/dairy-flat-air-booking).
@@ -59,10 +65,12 @@ flowchart TD
     UI --> F[Finn AI drawer]
     UI --> C[Contact]
 
-    W --> P1[CapyTech POS]
-    W --> P2[StudyMate AI]
-    W --> P3[Dairy Flat Air]
-    W --> P4[This site]
+    W --> P1[SG BusFlow]
+    W --> P2[NetScope]
+    W --> P3[CapyTech POS]
+    W --> P4[StudyMate AI]
+    W --> P5[Dairy Flat Air]
+    W --> P6[This site]
 
     F --> K[src/lib/finn.ts knowledge]
     C --> M[mailto kokosaw804@gmail.com]
@@ -80,7 +88,7 @@ Finn AI is a briefing drawer, not StudyMate.
 
 | Behavior | Detail |
 | --- | --- |
-| **Knowledge** | Who Finn is, why hire him, stack, CapyTech POS, StudyMate AI, Dairy Flat Air, this site, Massey / PSB, IBM certs, GitHub, LinkedIn, contact. |
+| **Knowledge** | Who Finn is, why hire him, stack, SG BusFlow, NetScope, CapyTech POS, StudyMate AI, Dairy Flat Air, this site, Massey / PSB, IBM certs, GitHub, LinkedIn, contact. |
 | **Matching** | Lowercased question, keyword hits, highest score wins. |
 | **Fallback** | If nothing matches, it lists the topics it can brief. |
 | **Not included** | No LLM provider, no RAG, no streaming, no stored chats. |
@@ -181,4 +189,4 @@ Full-Stack Developer / Software Engineer focused on building modern web applicat
 - GitHub: [@Gooniez3](https://github.com/Gooniez3)
 - LinkedIn: [saw-lwin-htoo](https://www.linkedin.com/in/saw-lwin-htoo-664447415/)
 - Live project: [finn-portfolio-blush.vercel.app](https://finn-portfolio-blush.vercel.app/)
-- Related: [StudyMate AI](https://github.com/Gooniez3/studymate-ai) · [CapyTech POS](https://github.com/Gooniez3/capytech-pos) · [Dairy Flat Air](https://github.com/Gooniez3/dairy-flat-air-booking)
+- Related: [SG BusFlow](https://github.com/Gooniez3/SG-BusFlow) · [NetScope](https://github.com/Gooniez3/NetScope) · [StudyMate AI](https://github.com/Gooniez3/studymate-ai) · [CapyTech POS](https://github.com/Gooniez3/capytech-pos) · [Dairy Flat Air](https://github.com/Gooniez3/dairy-flat-air-booking)

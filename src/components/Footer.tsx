@@ -10,10 +10,12 @@ const socials = [
 ]
 
 const live = [
-  { label: 'CapyTech POS', detail: 'Live on a shop PC' },
+  { label: 'SG BusFlow', detail: 'GitHub', href: 'https://github.com/Gooniez3/SG-BusFlow' },
+  { label: 'NetScope', detail: 'GitHub', href: 'https://github.com/Gooniez3/NetScope' },
+  { label: 'CapyTech POS', detail: 'Live on a shop PC', href: 'https://github.com/Gooniez3/capytech-pos' },
   { label: 'StudyMate AI', detail: 'studymateai.app', href: 'https://studymateai.app' },
   { label: 'Dairy Flat Air', detail: 'Live on Vercel', href: 'https://dairy-flat-air-booking.vercel.app' },
-  { label: 'Finn Portfolio', detail: 'finn-portfolio-blush.vercel.app', href: 'https://finn-portfolio-blush.vercel.app' },
+  { label: 'Finn Portfolio', detail: 'This site', href: 'https://finn-portfolio-blush.vercel.app' },
 ]
 
 export function Footer() {

@@ -3,6 +3,13 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { projects } from '../data/site'
 import { Headline, Kicker, Reveal } from './Reveal'
 
+function ringOffset(index: number, active: number, count: number) {
+  let offset = index - active
+  if (offset > count / 2) offset -= count
+  if (offset < -count / 2) offset += count
+  return offset
+}
+
 export function Work() {
   const [active, setActive] = useState(0)
   const [paused, setPaused] = useState(false)
@@ -23,7 +30,7 @@ export function Work() {
             className="mt-3 font-display text-4xl font-bold tracking-[-0.04em] md:text-6xl"
             text="Shipped products"
           />
-          <p className="mt-3 max-w-xl text-[var(--mute)]">Four shipped builds. Not a gallery of demos.</p>
+          <p className="mt-3 max-w-xl text-[var(--mute)]">{projects.length} shipped builds. Not a gallery of demos.</p>
         </Reveal>
 
         <div className="mt-8 md:hidden">
@@ -101,7 +108,7 @@ export function Work() {
           >
             <div className="pointer-events-none absolute top-1/2 left-1/2 h-56 w-56 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#3b82f6]/20 blur-3xl" />
             {projects.map((item, i) => {
-              const offset = i - active
+              const offset = ringOffset(i, active, projects.length)
               const abs = Math.abs(offset)
               const selected = abs === 0
               return (
@@ -120,8 +127,8 @@ export function Work() {
                     background: 'var(--bg)',
                     transform: `translate(-50%, -50%) translateX(${offset * 250}px) rotateY(${offset * -12}deg) translateZ(${selected ? 48 : -160}px) scale(${1 - abs * 0.1})`,
                     zIndex: 20 - abs,
-                    opacity: abs > 3 ? 0 : selected ? 1 : 0.72,
-                    pointerEvents: abs > 3 ? 'none' : 'auto',
+                    opacity: abs > 2 ? 0 : selected ? 1 : 0.72,
+                    pointerEvents: abs > 2 ? 'none' : 'auto',
                     transition: 'transform 0.55s cubic-bezier(0.16,1,0.3,1), width 0.55s cubic-bezier(0.16,1,0.3,1), height 0.55s cubic-bezier(0.16,1,0.3,1), opacity 0.4s ease',
                   }}
                 >
@@ -189,6 +196,19 @@ function ProjectCopy({
       >
         {item.blurb}
       </p>
+      {item.gallery.length > 0 && (
+        <div className={compact ? 'mt-3 grid grid-cols-2 gap-2' : 'mx-auto mt-6 grid max-w-3xl grid-cols-2 gap-3'}>
+          {item.gallery.map((src) => (
+            <img
+              key={src}
+              src={src}
+              alt={`${item.name} screenshot`}
+              className={compact ? 'h-28 w-full rounded-xl object-contain' : 'h-40 w-full rounded-xl object-contain md:h-48'}
+              style={{ border: '1px solid var(--line)', background: 'var(--bg)' }}
+            />
+          ))}
+        </div>
+      )}
       <ul className={compact ? 'mt-3 space-y-2 text-left' : 'mt-9 grid gap-3 text-left sm:grid-cols-2'}>
         {item.points.map((point) => (
           <motion.li

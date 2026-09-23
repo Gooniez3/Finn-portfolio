@@ -41,7 +41,7 @@ export function Recruiter({ open, onClose }: { open: boolean; onClose: () => voi
           </div>
         </div>
 
-        <p className="mt-8 leading-relaxed">{profile.line} Three proof points, all real:</p>
+        <p className="mt-8 leading-relaxed">{profile.line} Shipped systems, all real:</p>
         <ol className="mt-5 space-y-3">
           {projects.map((project) => (
             <li key={project.id} className="grid grid-cols-[28px_1fr] gap-3">

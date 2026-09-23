@@ -3,10 +3,12 @@ import { profile } from '../data/site'
 import { Reveal } from './Reveal'
 
 const facts = [
-  { n: '01', title: 'CapyTech POS', detail: 'Live on a shop PC' },
-  { n: '02', title: 'StudyMate AI', detail: 'studymateai.app' },
-  { n: '03', title: 'Dairy Flat Air', detail: 'Live on Vercel' },
-  { n: '04', title: 'Finn Portfolio', detail: 'finn-portfolio-blush.vercel.app' },
+  { n: '01', title: 'SG BusFlow', detail: 'Buses, journeys, Ask BusFlow' },
+  { n: '02', title: 'NetScope', detail: 'Desktop network diagnostics' },
+  { n: '03', title: 'CapyTech POS', detail: 'Live on a shop PC' },
+  { n: '04', title: 'StudyMate AI', detail: 'studymateai.app' },
+  { n: '05', title: 'Dairy Flat Air', detail: 'Live on Vercel' },
+  { n: '06', title: 'Finn Portfolio', detail: 'This site' },
 ]
 
 export function Now() {
@@ -40,7 +42,7 @@ export function Now() {
             {profile.city} · {time || '--:--'}
           </p>
         </Reveal>
-        <div className="grid flex-1 gap-x-6 gap-y-3 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid flex-1 gap-x-6 gap-y-3 sm:grid-cols-2 lg:grid-cols-3">
           {facts.map((fact, i) => (
             <Reveal key={fact.n} delay={0.08 * i} y={20}>
               <div className="flex items-baseline gap-3">

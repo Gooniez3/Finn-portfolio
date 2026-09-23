@@ -4,12 +4,12 @@ const knowledge: Entry[] = [
   {
     keys: ['who', 'about', 'himself', 'bio', 'introduce', 'introduction', 'finn', 'name', 'saw', 'htoo'],
     answer:
-      "Saw Lwin Htoo — friends call him Finn. He's a full-stack developer in Singapore. He builds products from idea to production: thoughtful interfaces, scalable backends, databases, cloud, and AI-powered features. He's a continuous learner who uses AI alongside engineering to turn ideas into useful software. Proof: CapyTech POS in a real shop, StudyMate AI at studymateai.app, Dairy Flat Air on Vercel, and this site at finn-portfolio-blush.vercel.app.",
+      "Saw Lwin Htoo — friends call him Finn. He's a full-stack developer in Singapore. He builds products from idea to production: thoughtful interfaces, scalable backends, databases, cloud, and AI-powered features. He's a continuous learner who uses AI alongside engineering to turn ideas into useful software. Proof: SG BusFlow with Ask BusFlow, NetScope for network diagnostics, CapyTech POS in a real shop, StudyMate AI at studymateai.app, Dairy Flat Air on Vercel, and this site at finn-portfolio-blush.vercel.app.",
   },
   {
     keys: ['hire', 'job', 'role', 'fit', 'why', 'recruiter', 'strength', 'opportunity', 'open'],
     answer:
-      "Hire him if you want someone who owns a whole product, not a single layer. He has shipped a live client POS (money, stock, invoices), a production AI app with LangGraph + RAG, and a deployed booking system with timezone-aware scheduling. Diploma in InfoComm Technology (PSB Academy), then Massey BInfSc — CS + IT — 8.8 / 9 GPA, plus IBM certs in RAG & Agentic AI and DevOps. Based in Singapore, open to full-time software engineering and focused freelance work.",
+      "Hire him if you want someone who owns a whole product, not a single layer. He has shipped SG BusFlow (live Singapore buses plus Ask BusFlow), NetScope (desktop network diagnostics), a live client POS (money, stock, invoices), a production AI app with LangGraph + RAG, and a deployed booking system with timezone-aware scheduling. Diploma in InfoComm Technology (PSB Academy), then Massey BInfSc — CS + IT — 8.8 / 9 GPA, plus IBM certs in RAG & Agentic AI and DevOps. Based in Singapore, open to full-time software engineering and focused freelance work.",
   },
   {
     keys: ['where', 'location', 'singapore', 'based', 'city'],
@@ -19,7 +19,17 @@ const knowledge: Entry[] = [
   {
     keys: ['skill', 'stack', 'tech', 'language', 'typescript', 'python', 'react', 'next'],
     answer:
-      "Languages: TypeScript, JavaScript, Python, Java, C#, C++, Kotlin, SQL, Haskell. Frontend: React, Next.js, Vite, Tailwind, HTML, CSS. Backend: Node, Express, FastAPI, ASP.NET Core, REST APIs. Data: PostgreSQL, MongoDB, MySQL, Oracle SQL, Prisma, Entity Framework, pgvector. AI: LangGraph, LangChain, RAG, agents, Groq, Gemini, OpenRouter. Cloud: AWS, Docker, Vercel, Cloudflare, GitHub Actions. Also Raspberry Pi / IoT. The through-line is TypeScript full-stack plus agentic AI.",
+      "Languages: TypeScript, JavaScript, Python, Java, C#, C++, Kotlin, SQL, Haskell. Frontend: React, Next.js, Expo, React Native, Vite, Tailwind, HTML, CSS. Backend: Node, Express, FastAPI, ASP.NET Core, REST APIs. Data: PostgreSQL, PostGIS, Redis, SQLite, MongoDB, MySQL, Oracle SQL, Prisma, Entity Framework, pgvector. AI: LangGraph, LangChain, RAG, agents, Groq, Gemini, OpenRouter. Desktop: C# and Avalonia. Cloud: AWS, Docker, Vercel, Cloudflare, GitHub Actions. Also Raspberry Pi / IoT. The through-line is TypeScript full-stack plus agentic AI.",
+  },
+  {
+    keys: ['busflow', 'bus', 'lta', 'arrival', 'arrivals', 'journey', 'expo', 'datamall', 'ask busflow'],
+    answer:
+      "SG BusFlow is his current project: Singapore bus arrivals, nearby stops, and walk-plus-bus journeys on a Next.js site and an Expo app, from one FastAPI API. Minutes come from LTA DataMall through a worker into Redis. The model does not invent a time. Ask BusFlow is the differentiator — you ask in plain language, tools look up the same stops, arrivals, and journeys, and the reply includes tappable cards. Saved stops stay on the device. No account. Repo: github.com/Gooniez3/SG-BusFlow. It runs locally with Docker; it is not a public hosted demo.",
+  },
+  {
+    keys: ['netscope', 'ping', 'dns', 'traceroute', 'avalonia', 'diagnostic'],
+    answer:
+      "NetScope is a local Windows desktop app for network monitoring and diagnostics. Live latency, ping, DNS, traceroute, TCP ports, and LAN discovery sit in one window, with optional SQLite history. A rule-based explainer describes a saved session from the measurements — offline, no account, no API key, and no language model. Stack: C#, .NET, Avalonia, SQLite. Avalonia and the CLI call the same Core, and Core has no sockets and no database. Repo: github.com/Gooniez3/NetScope.",
   },
   {
     keys: ['capy', 'pos', 'shop', 'retail', 'till', 'barcode', 'invoice', 'stock'],
@@ -54,7 +64,7 @@ const knowledge: Entry[] = [
   {
     keys: ['github', 'repo', 'code', 'gooniez'],
     answer:
-      "GitHub is github.com/Gooniez3. Public repos: capytech-pos, studymate-ai, dairy-flat-air-booking, Finn-portfolio, and his profile README. That's the best place to read how the systems actually work.",
+      "GitHub is github.com/Gooniez3. Public repos: SG-BusFlow, NetScope, capytech-pos, studymate-ai, dairy-flat-air-booking, Finn-portfolio, and his profile README. That's the best place to read how the systems actually work.",
   },
   {
     keys: ['linkedin', 'connect', 'network'],
@@ -69,14 +79,14 @@ const knowledge: Entry[] = [
   {
     keys: ['experience', 'freelance', 'work', 'client', 'job history'],
     answer:
-      "He's currently shipping as a freelance full-stack developer. The standout client system is CapyTech POS, in daily use at a computer accessories shop. Alongside that he built and deployed StudyMate AI, Dairy Flat Air, and this portfolio. Path: PSB diploma → Massey BInfSc at 8.8/9 → client and live products. He's looking at full-time software engineering roles as well as freelance product work.",
+      "He's currently shipping as a freelance full-stack developer. Current build is SG BusFlow, a Singapore bus app with live arrivals and Ask BusFlow. Before that, NetScope, a desktop network diagnostic. The standout client system is CapyTech POS, in daily use at a computer accessories shop. Alongside that he built and deployed StudyMate AI, Dairy Flat Air, and this portfolio. Path: PSB diploma → Massey BInfSc at 8.8/9 → client and live products. He's looking at full-time software engineering roles as well as freelance product work.",
   },
 ]
 
 export const prompts = [
-  "Who is Saw?",
-  'Tell me about CapyTech POS.',
-  'What is StudyMate AI?',
+  'Who is Saw?',
+  'What is SG BusFlow?',
+  'Tell me about NetScope.',
   'Why hire him?',
 ]
 
@@ -88,5 +98,5 @@ export function answerFinn(question: string) {
     if (score > 0 && (!best || score > best.score)) best = { score, answer: item.answer }
   }
   if (best) return best.answer
-  return "I can brief you on Saw (Finn): skills, CapyTech POS, StudyMate AI, Dairy Flat Air, this portfolio, Massey education, IBM certs, GitHub, LinkedIn, or whether he's a fit for a role. What do you want to know?"
+  return "I can brief you on Saw (Finn): skills, SG BusFlow, NetScope, CapyTech POS, StudyMate AI, Dairy Flat Air, this portfolio, Massey education, IBM certs, GitHub, LinkedIn, or whether he's a fit for a role. What do you want to know?"
 }

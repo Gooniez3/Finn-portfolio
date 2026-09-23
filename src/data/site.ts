@@ -43,6 +43,9 @@ export const marquee = [
   'Groq',
   'Gemini',
   'OpenRouter',
+  'FastAPI',
+  'Expo',
+  'Redis',
 ]
 
 export const graph = {
@@ -73,8 +76,46 @@ export const graph = {
 
 export const projects = [
   {
-    id: 'capytech',
+    id: 'busflow',
     n: '01',
+    name: 'SG BusFlow',
+    kicker: 'Current · Singapore buses',
+    status: 'Next.js and Expo · one API',
+    blurb: 'Live arrivals, journeys, and Ask BusFlow — an assistant other Singapore bus apps leave out.',
+    points: [
+      { label: 'Ask BusFlow', text: 'Plain-language questions. Tools read the same stops, arrivals, and journeys, then the reply shows tappable cards.' },
+      { label: 'No invented times', text: 'Minutes come from LTA DataMall through one worker. A missing cache is no live wait, not a guessed minute.' },
+      { label: 'One API, two clients', text: 'Next.js and Expo share FastAPI. Saved stops stay on the device. There is no account.' },
+      { label: 'Journeys', text: 'Walk plus bus, at most two transfers, ranked by time or by fewer changes.' },
+    ],
+    stack: ['Next.js', 'Expo', 'TypeScript', 'FastAPI', 'PostgreSQL', 'Redis'],
+    repo: 'https://github.com/Gooniez3/SG-BusFlow',
+    live: null as string | null,
+    image: '/work/bus-nearby.jpg',
+    gallery: ['/work/bus-ai.jpg', '/work/bus-journey.jpg'],
+  },
+  {
+    id: 'netscope',
+    n: '02',
+    name: 'NetScope',
+    kicker: 'Desktop · network diagnostics',
+    status: 'Windows app · v1.0',
+    blurb: 'Ping, DNS, traceroute, ports, and LAN discovery in one window, explained from the measurements.',
+    points: [
+      { label: 'One window', text: 'Dashboard, monitor, diagnostics, and LAN discovery instead of separate ping and traceroute tools.' },
+      { label: 'Local history', text: 'Optional SQLite sessions on the machine. No account and no cloud sync.' },
+      { label: 'Rule-based analysis', text: 'A saved run is explained from the measurements. It works offline and does not call a language model.' },
+      { label: 'Clean architecture', text: 'Avalonia and the CLI call the same Core. Core has no sockets and no database.' },
+    ],
+    stack: ['C#', '.NET', 'Avalonia', 'SQLite'],
+    repo: 'https://github.com/Gooniez3/NetScope',
+    live: null as string | null,
+    image: '/work/net-dashboard.png',
+    gallery: ['/work/net-monitor.png', '/work/net-analysis.png'],
+  },
+  {
+    id: 'capytech',
+    n: '03',
     name: 'CapyTech POS',
     kicker: 'Live client · computer accessories shop',
     status: 'In production on the shop PC',
@@ -93,7 +134,7 @@ export const projects = [
   },
   {
     id: 'studymate',
-    n: '02',
+    n: '04',
     name: 'StudyMate AI',
     kicker: 'Live product',
     status: 'studymateai.app',
@@ -112,7 +153,7 @@ export const projects = [
   },
   {
     id: 'dairy',
-    n: '03',
+    n: '05',
     name: 'Dairy Flat Air',
     kicker: 'Live booking platform',
     status: 'dairy-flat-air-booking.vercel.app',
@@ -131,13 +172,13 @@ export const projects = [
   },
   {
     id: 'portfolio',
-    n: '04',
+    n: '06',
     name: 'Finn Portfolio',
     kicker: 'Personal site',
     status: 'finn-portfolio-blush.vercel.app',
     blurb: 'The site you are on — selected work in 3D, scroll motion, and Finn AI that answers from the real shipped systems.',
     points: [
-      { label: 'Real case notes', text: 'CapyTech, StudyMate, and Dairy Flat Air with actual screenshots — not placeholder mockups.' },
+      { label: 'Real case notes', text: 'SG BusFlow, NetScope, CapyTech, StudyMate, and Dairy Flat Air with actual screenshots — not placeholder mockups.' },
       { label: '3D work gallery', text: 'Coverflow on desktop, one project at a time on mobile. Selected shots stay uncropped.' },
       { label: 'Finn AI', text: 'A drawer that answers from the POS, the AI app, the booking system, education, and GitHub.' },
       { label: 'Motion, not noise', text: 'Scroll reveals, magnetic buttons, and a cursor spotlight — all off if you prefer reduced motion.' },
@@ -163,7 +204,7 @@ export const experience = [
     when: 'Projects',
     title: 'Software projects',
     place: 'Shipped systems',
-    body: 'Turned coursework into products people use — a shop till, a live AI learning workspace, a regional airline booking platform, and this site, plus IoT and cloud work along the way.',
+    body: 'Turned coursework into products people use — a Singapore bus app with an in-app assistant, a desktop network diagnostic, a shop till, a live AI learning workspace, a regional airline booking platform, and this site.',
   },
   {
     n: '03',
@@ -207,10 +248,10 @@ export const certs = [
 ]
 
 export const skills = {
-  Frontend: ['React', 'Next.js', 'Vite', 'TypeScript', 'JavaScript', 'Tailwind CSS', 'HTML', 'CSS'],
+  Frontend: ['React', 'Next.js', 'Expo', 'React Native', 'Vite', 'TypeScript', 'JavaScript', 'Tailwind CSS', 'HTML', 'CSS'],
   Backend: ['C#', 'ASP.NET Core', 'Python', 'FastAPI', 'Node.js', 'Express', 'REST APIs'],
   Languages: ['TypeScript', 'JavaScript', 'Python', 'Java', 'C#', 'C++', 'Kotlin', 'SQL', 'Haskell'],
-  Data: ['PostgreSQL', 'MongoDB', 'Oracle SQL', 'MySQL', 'Prisma', 'Entity Framework Core', 'pgvector'],
+  Data: ['PostgreSQL', 'PostGIS', 'Redis', 'SQLite', 'MongoDB', 'Oracle SQL', 'MySQL', 'Prisma', 'Entity Framework Core', 'pgvector'],
   'AI / LLM': ['LangChain', 'LangGraph', 'RAG', 'LLMs', 'AI Agents', 'Vector Search', 'Embeddings', 'Gemini', 'Groq', 'OpenRouter'],
   'Cloud / DevOps': ['AWS', 'Cloud Computing', 'Cloudflare', 'Vercel', 'Git', 'GitHub', 'GitHub Actions', 'Docker', 'CI/CD'],
   IoT: ['Raspberry Pi', 'IoT Systems', 'Cloud-Connected IoT'],
@@ -259,14 +300,14 @@ export const capabilities = [
 ]
 
 export const currently = [
-  { title: 'Building', detail: 'Production full-stack and AI products' },
+  { title: 'Building', detail: 'SG BusFlow — live buses and Ask BusFlow' },
   { title: 'Exploring', detail: 'Agentic workflows and RAG' },
   { title: 'Open to', detail: 'Full-time software engineering roles' },
 ]
 
 export const stats = [
   { label: 'Massey GPA', value: '8.8/9' },
-  { label: 'Shipped products', value: '4' },
+  { label: 'Shipped products', value: '6' },
   { label: 'IBM certificates', value: '2' },
 ]
 
