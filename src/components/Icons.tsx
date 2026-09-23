@@ -52,20 +52,42 @@ export function SocialIcons({ className = '' }: { className?: string }) {
   )
 }
 
-export function ContactInline({ className = '' }: { className?: string }) {
+export function ContactCompact() {
   return (
-    <div className={`flex flex-col items-center gap-3 sm:flex-row sm:flex-wrap sm:justify-center sm:gap-x-6 ${className}`}>
+    <div className="grid grid-cols-3 gap-2">
+      {links.map(({ href, label, Icon, external }) => (
+        <a
+          key={label}
+          href={href}
+          className="flex flex-col items-center gap-2 rounded-2xl border px-2 py-3 text-center transition hover:border-[#3b82f6]"
+          style={{ borderColor: 'var(--line)', background: 'var(--card)' }}
+          {...(external ? { target: '_blank', rel: 'noreferrer' } : {})}
+        >
+          <Icon />
+          <span className="text-[10px] tracking-[0.14em] text-[var(--mute)] uppercase">{label}</span>
+        </a>
+      ))}
+    </div>
+  )
+}
+
+export function ContactLinks() {
+  return (
+    <div className="mt-8 grid gap-3">
       {links.map(({ href, label, detail, Icon, external }) => (
         <a
           key={label}
           href={href}
-          className="inline-flex items-center gap-2 text-sm transition hover:text-[#3b82f6]"
+          className="flex min-h-14 items-center gap-4 rounded-2xl border px-4 py-3 transition hover:border-[#3b82f6]"
+          style={{ borderColor: 'var(--line)', background: 'var(--card)' }}
           {...(external ? { target: '_blank', rel: 'noreferrer' } : {})}
         >
-          <Icon />
-          <span className="text-left">
+          <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full border" style={{ borderColor: 'var(--line)' }}>
+            <Icon />
+          </span>
+          <span className="min-w-0">
             <span className="block text-[10px] tracking-[0.16em] text-[var(--mute)] uppercase">{label}</span>
-            <span className="font-medium">{detail}</span>
+            <span className="mt-0.5 block truncate text-sm font-medium">{detail}</span>
           </span>
         </a>
       ))}

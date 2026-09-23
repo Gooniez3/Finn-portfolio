@@ -232,6 +232,24 @@ html.light .chip-strong:hover {
   }
 }
 
+.panel {
+  position: relative;
+  overflow: hidden;
+  border-radius: 22px;
+  background:
+    linear-gradient(var(--card), var(--card)) padding-box,
+    linear-gradient(150deg, rgb(59 130 246 / 0.75), rgb(59 130 246 / 0.08) 42%, rgb(59 130 246 / 0.4)) border-box;
+  border: 1px solid transparent;
+}
+
+.no-scrollbar {
+  scrollbar-width: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
 .portrait-glow {
   box-shadow: 0 0 0 1px var(--line), 0 20px 50px rgb(59 130 246 / 0.18);
 }

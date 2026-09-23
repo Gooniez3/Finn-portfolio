@@ -27,20 +27,15 @@ export function Footer() {
       style={{ borderColor: 'var(--line)' }}
     >
       <div className="mx-auto max-w-6xl">
-        <div className="text-center md:hidden">
-          <p className="font-display text-2xl font-bold tracking-[-0.04em]">{profile.handle}</p>
-          <p className="mt-1 text-[11px] tracking-[0.18em] text-[var(--mute)] uppercase">Full-stack · AI · {profile.city}</p>
-          <div className="mt-4 flex flex-wrap items-center justify-center gap-x-1 text-sm">
-            {nav.map((item, i) => (
-              <span key={item.id} className="inline-flex items-center">
-                {i > 0 ? <span className="px-2 text-[var(--mute)]">·</span> : null}
-                <button type="button" onClick={() => scrollToId(item.id)} className="text-[var(--ink)]">
-                  {item.label}
-                </button>
-              </span>
+        <div className="md:hidden">
+          <div className="flex flex-wrap gap-x-4 gap-y-2">
+            {nav.map((item) => (
+              <button key={item.id} type="button" onClick={() => scrollToId(item.id)} className="text-sm text-[var(--ink)]">
+                {item.label}
+              </button>
             ))}
           </div>
-          <div className="mt-4 flex justify-center gap-3">
+          <div className="mt-4 flex gap-3">
             {socials.map(({ href, label, Icon, external }) => (
               <a
                 key={label}
@@ -54,12 +49,6 @@ export function Footer() {
               </a>
             ))}
           </div>
-          <p className="mt-5 text-xs text-[var(--mute)]">
-            © {year} {profile.name}. Designed & built by {profile.handle}.
-          </p>
-          <button type="button" onClick={() => scrollToId('hero')} className="mt-2 text-sm text-[var(--ink)]">
-            Back to top ↑
-          </button>
         </div>
 
         <div className="hidden gap-10 border-b pb-12 md:grid md:grid-cols-2 lg:grid-cols-4" style={{ borderColor: 'var(--line)' }}>
@@ -143,7 +132,7 @@ export function Footer() {
           </Reveal>
         </div>
 
-        <div className="mt-8 hidden flex-col gap-3 md:flex md:flex-row md:items-end md:justify-between">
+        <div className="mt-5 flex flex-col gap-3 md:mt-8 md:flex-row md:items-end md:justify-between">
           <div className="text-sm text-[var(--mute)]">
             <p>
               © {year} {profile.name}. Designed & built by {profile.handle}.

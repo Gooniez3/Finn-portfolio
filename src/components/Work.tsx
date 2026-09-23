@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { motion } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
 import { projects } from '../data/site'
 import { Headline, Kicker, Reveal } from './Reveal'
 
@@ -10,11 +10,14 @@ function ringOffset(index: number, active: number, count: number) {
   return offset
 }
 
+type Project = (typeof projects)[number]
+
 export function Work() {
   const [active, setActive] = useState(0)
   const [paused, setPaused] = useState(false)
   const [wide, setWide] = useState(false)
   const dragX = useRef<number | null>(null)
+  const swiped = useRef(false)
   const project = projects[active]
 
   useEffect(() => {
@@ -39,7 +42,7 @@ export function Work() {
   const step = (dir: number) => go(active + dir)
 
   return (
-    <section id="work" className="relative overflow-x-clip scroll-mt-24 px-5 py-12 md:px-8 md:py-20" style={{ overflowAnchor: 'none' }}>
+    <section id="work" className="relative overflow-x-clip scroll-mt-24 px-5 py-12 md:px-8 md:py-24" style={{ overflowAnchor: 'none' }}>
       <div className="mx-auto max-w-6xl">
         <Reveal>
           <Kicker>Selected work</Kicker>
@@ -51,130 +54,148 @@ export function Work() {
         </Reveal>
 
         <div
-          className="mt-6 grid items-start gap-5 md:mt-10 md:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)] md:gap-12"
+          className="mt-8 lg:grid lg:grid-cols-[minmax(0,1.12fr)_minmax(300px,0.88fr)] lg:items-center lg:gap-10"
           onMouseEnter={() => wide && setPaused(true)}
           onMouseLeave={() => wide && setPaused(false)}
+          onPointerDown={(event) => {
+            if (event.pointerType === 'mouse') return
+            dragX.current = event.clientX
+          }}
+          onPointerUp={(event) => {
+            if (dragX.current == null) return
+            const delta = event.clientX - dragX.current
+            dragX.current = null
+            if (delta > 36) {
+              swiped.current = true
+              step(-1)
+            } else if (delta < -36) {
+              swiped.current = true
+              step(1)
+            }
+          }}
+          onClickCapture={(event) => {
+            if (!swiped.current) return
+            swiped.current = false
+            event.preventDefault()
+            event.stopPropagation()
+          }}
         >
-          <div className="order-2 md:order-1" style={{ overflowAnchor: 'none' }}>
-            <div className="grid">
-              {projects.map((item) => {
-                const on = item.id === project.id
-                return (
-                  <article
-                    key={item.id}
-                    className="col-start-1 row-start-1"
-                    style={{ visibility: on ? 'visible' : 'hidden', opacity: on ? 1 : 0, transition: 'opacity 0.28s ease' }}
-                    aria-hidden={!on}
-                    {...(!on ? { inert: true } : {})}
-                  >
-                    <ProjectCopy item={item} />
-                  </article>
-                )
-              })}
-            </div>
-          </div>
-
-          <div
-            className="order-1 md:order-2"
-            onPointerDown={(event) => {
-              if (event.pointerType === 'mouse') return
-              dragX.current = event.clientX
-            }}
-            onPointerUp={(event) => {
-              if (dragX.current == null) return
-              const delta = event.clientX - dragX.current
-              dragX.current = null
-              if (delta > 36) step(-1)
-              else if (delta < -36) step(1)
-            }}
-          >
-            <div className="relative">
+          <div className="min-w-0 overflow-hidden">
             <motion.div
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-              className="relative mx-auto h-[220px] max-w-6xl [transform-style:preserve-3d] sm:h-[260px] md:h-[360px]"
-              style={{ perspective: wide ? '1100px' : '900px' }}
+              className="relative mx-auto h-[220px] max-w-6xl [transform-style:preserve-3d] md:h-[380px] lg:h-[420px]"
+              style={{ perspective: wide ? '1200px' : '900px' }}
             >
-              <div className="pointer-events-none absolute top-1/2 left-1/2 h-40 w-40 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#3b82f6]/20 blur-3xl md:h-52 md:w-52" />
+              <div className="pointer-events-none absolute top-1/2 left-1/2 h-40 w-40 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#3b82f6]/20 blur-3xl lg:h-56 lg:w-56" />
               {projects.map((item, i) => {
                 const offset = ringOffset(i, active, projects.length)
                 const abs = Math.abs(offset)
                 const selected = abs === 0
-                const spread = wide ? 168 : 86
-                const depth = wide ? 110 : 64
-                const hidden = abs > 1
+                const spread = wide ? 168 : 72
+                const depth = wide ? 140 : 70
+                const hidden = abs > (wide ? 2 : 1)
                 return (
                   <button
                     key={item.id}
                     type="button"
                     aria-label={item.name}
-                    aria-current={selected ? 'true' : undefined}
                     onClick={() => go(i)}
-                    className="absolute top-1/2 left-1/2 cursor-pointer overflow-hidden rounded-2xl border shadow-2xl"
+                    className="absolute top-1/2 left-1/2 overflow-hidden rounded-2xl border shadow-2xl"
                     style={{
-                      width: selected ? (wide ? '62%' : '68%') : wide ? '48%' : '52%',
-                      height: selected ? '100%' : '78%',
+                      width: selected ? (wide ? '58%' : '72%') : wide ? '40%' : '54%',
+                      height: selected ? '100%' : '76%',
                       borderColor: 'var(--line)',
                       background: 'var(--bg)',
-                      transform: `translate(-50%, -50%) translateX(${offset * spread}px) rotateY(${offset * (wide ? -16 : -24)}deg) translateZ(${selected ? 40 : -depth}px) scale(${1 - abs * 0.06})`,
+                      transform: `translate(-50%, -50%) translateX(${offset * spread}px) rotateY(${offset * (wide ? -16 : -22)}deg) translateZ(${selected ? 40 : -depth}px) scale(${1 - abs * 0.08})`,
                       zIndex: 20 - abs,
-                      opacity: hidden ? 0 : selected ? 1 : 0.78,
-                      pointerEvents: 'none',
-                      transition:
-                        'transform 0.55s cubic-bezier(0.16,1,0.3,1), width 0.55s cubic-bezier(0.16,1,0.3,1), height 0.55s cubic-bezier(0.16,1,0.3,1), opacity 0.4s ease',
+                      opacity: hidden ? 0 : selected ? 1 : 0.72,
+                      pointerEvents: hidden ? 'none' : 'auto',
+                      transition: 'transform 0.55s cubic-bezier(0.16,1,0.3,1), width 0.55s cubic-bezier(0.16,1,0.3,1), height 0.55s cubic-bezier(0.16,1,0.3,1), opacity 0.4s ease',
                     }}
                   >
-                    <img src={item.image} alt="" className="pointer-events-none h-full w-full object-contain" />
+                    <img src={item.image} alt="" className="h-full w-full object-contain" />
                   </button>
                 )
               })}
-            </motion.div>
-              <button
-                type="button"
-                aria-label={projects[(active - 1 + projects.length) % projects.length].name}
-                onClick={() => step(-1)}
-                className="absolute inset-y-0 left-0 z-30 w-[28%]"
-              />
-              <button
-                type="button"
-                aria-label={projects[(active + 1) % projects.length].name}
-                onClick={() => step(1)}
-                className="absolute inset-y-0 right-0 z-30 w-[28%]"
-              />
               <button
                 type="button"
                 aria-label="Previous project"
                 onClick={() => step(-1)}
-                className="absolute top-1/2 left-0 z-40 grid h-10 w-10 -translate-y-1/2 place-items-center rounded-full border bg-[var(--bg)]/85 text-lg backdrop-blur-sm"
-                style={{ borderColor: 'var(--line)' }}
-              >
-                ‹
-              </button>
+                className="absolute inset-y-0 left-0 z-30 w-[24%]"
+              />
               <button
                 type="button"
                 aria-label="Next project"
                 onClick={() => step(1)}
-                className="absolute top-1/2 right-0 z-40 grid h-10 w-10 -translate-y-1/2 place-items-center rounded-full border bg-[var(--bg)]/85 text-lg backdrop-blur-sm"
+                className="absolute inset-y-0 right-0 z-30 w-[24%]"
+              />
+            </motion.div>
+
+            <div className="relative mt-4 h-[252px] overflow-hidden md:hidden" style={{ overflowAnchor: 'none' }}>
+              <AnimatePresence initial={false}>
+                <motion.div
+                  key={project.id}
+                  className="absolute inset-0"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.25 }}
+                >
+                  <PhoneCopy item={project} />
+                </motion.div>
+              </AnimatePresence>
+            </div>
+
+            <div className="mt-3 flex items-center justify-center gap-3 lg:mt-5">
+              <button
+                type="button"
+                aria-label="Previous project"
+                onClick={() => step(-1)}
+                className="grid h-10 w-10 place-items-center rounded-full border text-lg lg:hidden"
+                style={{ borderColor: 'var(--line)' }}
+              >
+                ‹
+              </button>
+              <div className="flex gap-2">
+                {projects.map((item, i) => (
+                  <button
+                    key={item.id}
+                    type="button"
+                    aria-label={item.name}
+                    onClick={() => go(i)}
+                    className="h-2 w-2 rounded-full lg:h-2.5 lg:w-2.5"
+                    style={{ background: i === active ? 'var(--ink)' : 'var(--line)' }}
+                  />
+                ))}
+              </div>
+              <button
+                type="button"
+                aria-label="Next project"
+                onClick={() => step(1)}
+                className="grid h-10 w-10 place-items-center rounded-full border text-lg lg:hidden"
                 style={{ borderColor: 'var(--line)' }}
               >
                 ›
               </button>
             </div>
+          </div>
 
-            <div className="mt-3 flex justify-center gap-2">
-              {projects.map((item, i) => (
-                <button
-                  key={item.id}
-                  type="button"
-                  aria-label={item.name}
-                  onClick={() => go(i)}
-                  className="h-2 w-2 rounded-full md:h-2.5 md:w-2.5"
-                  style={{ background: i === active ? 'var(--ink)' : 'var(--line)' }}
-                />
-              ))}
-            </div>
+          <div className="relative mt-2 hidden h-[380px] overflow-hidden md:block lg:mt-0 lg:h-[420px]" style={{ overflowAnchor: 'none' }}>
+            <AnimatePresence initial={false}>
+              <motion.div
+                key={project.id}
+                className="absolute inset-0"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.28 }}
+              >
+                <DeskCopy item={project} />
+              </motion.div>
+            </AnimatePresence>
           </div>
         </div>
       </div>
@@ -182,37 +203,54 @@ export function Work() {
   )
 }
 
-function ProjectCopy({ item }: { item: (typeof projects)[number] }) {
+function PhoneCopy({ item }: { item: Project }) {
   return (
-    <div>
-      <p className="text-[10px] font-semibold tracking-[0.2em] text-[#3b82f6] uppercase md:text-[11px]">{item.kicker}</p>
-      <h3 className="mt-1 font-display text-2xl font-bold tracking-[-0.04em] md:mt-2 md:text-4xl">{item.name}</h3>
-      <p className="mt-2 text-[13px] leading-5 text-[var(--mute)] md:mt-3 md:text-[15px] md:leading-7">{item.summary}</p>
-      <ul className="mt-3 hidden space-y-2 md:block">
+    <div className="flex h-full flex-col">
+      <p className="text-[10px] font-semibold tracking-[0.2em] text-[#3b82f6] uppercase">{item.kicker}</p>
+      <h3 className="mt-1 font-display text-xl font-bold tracking-[-0.03em]">{item.name}</h3>
+      <p className="mt-1.5 line-clamp-8 text-[13px] leading-5 text-[var(--mute)]">{item.blurb}</p>
+      <Links item={item} className="mt-2" />
+    </div>
+  )
+}
+
+function DeskCopy({ item }: { item: Project }) {
+  return (
+    <div className="flex h-full flex-col">
+      <p className="text-[11px] font-semibold tracking-[0.2em] text-[#3b82f6] uppercase">{item.kicker}</p>
+      <h3 className="mt-2 font-display text-4xl font-bold tracking-[-0.04em]">{item.name}</h3>
+      <p className="mt-3 text-sm leading-6 text-[var(--mute)]">{item.blurb}</p>
+      <ul className="mt-4 grid gap-2 sm:grid-cols-2">
         {item.points.map((point) => (
-          <li key={point.label} className="text-[13px] leading-5">
-            <span className="font-semibold tracking-[0.12em] text-[#3b82f6] uppercase">{point.label}. </span>
-            <span className="text-[var(--ink)]">{point.text}</span>
+          <li key={point.label} className="min-w-0">
+            <p className="text-[10px] font-bold tracking-[0.14em] text-[#3b82f6] uppercase">{point.label}</p>
+            <p className="mt-0.5 line-clamp-2 text-[13px] leading-5 text-[var(--ink)]">{point.text}</p>
           </li>
         ))}
       </ul>
-      <div className="mt-3 hidden flex-wrap gap-1.5 md:flex">
+      <div className="mt-auto flex flex-wrap gap-1.5 pt-3">
         {item.stack.map((tag) => (
-          <span key={tag} className="text-[11px] tracking-[0.08em] text-[var(--mute)] uppercase">
+          <span key={tag} className="chip px-2.5 py-1 text-[10px] font-medium tracking-[0.08em] uppercase">
             {tag}
           </span>
         ))}
       </div>
-      <div className="mt-3 flex gap-5 text-sm font-semibold">
-        {item.live && (
-          <a href={item.live} target="_blank" rel="noreferrer" className="text-[#3b82f6] underline underline-offset-4">
-            Open live →
-          </a>
-        )}
-        <a href={item.repo} target="_blank" rel="noreferrer" className="underline underline-offset-4">
-          GitHub →
+      <Links item={item} className="mt-3" />
+    </div>
+  )
+}
+
+function Links({ item, className }: { item: Project; className?: string }) {
+  return (
+    <div className={`flex gap-4 text-sm font-semibold ${className ?? ''}`}>
+      {item.live && (
+        <a href={item.live} target="_blank" rel="noreferrer" className="text-[#3b82f6] underline underline-offset-4">
+          Open live →
         </a>
-      </div>
+      )}
+      <a href={item.repo} target="_blank" rel="noreferrer" className="underline underline-offset-4">
+        GitHub →
+      </a>
     </div>
   )
 }
