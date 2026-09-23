@@ -3,7 +3,7 @@ import { CountUp, Headline, Kicker, Reveal } from './Reveal'
 
 const about = [
   'Friends call me Finn. I started with a Diploma in InfoComm Technology at PSB Academy and continued with a Bachelor of Information Sciences at Massey University, studying Computer Science and Information Technology.',
-  'I build products from idea to production — from thoughtful interfaces and reliable backends to databases, cloud infrastructure, and AI-powered features. Along the way, I’ve built a real POS system, an AI learning platform with RAG, a flight booking system built around real scheduling and timezone logic, and this site.',
+  'I build products from idea to production — from thoughtful interfaces and reliable backends to databases, cloud infrastructure, and AI-powered features. Along the way, I’ve built SG BusFlow (Singapore bus arrivals and Ask BusFlow), NetScope for network diagnostics, a real POS system, an AI learning platform with RAG, a flight booking system built around real scheduling and timezone logic, and this site.',
   'I’m also a first-principles learner. I like understanding how things work, picking up technologies I haven’t used before, and figuring out how to turn an idea into something people can actually use. I work with AI as part of my engineering workflow — not just to generate code, but to research, prototype, debug, experiment, and move from idea to implementation faster.',
   'I’m still learning. I’m still building. And that’s the part I enjoy most.',
 ]

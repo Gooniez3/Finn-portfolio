@@ -7,11 +7,11 @@ export const profile = {
   githubName: '@Gooniez3',
   linkedin: 'https://www.linkedin.com/in/saw-lwin-htoo-664447415/',
   email: 'kokosaw804@gmail.com',
-  role: 'Full-Stack Developer · Singapore',
-  line: 'I build products from idea to production — combining thoughtful interfaces, scalable backends, databases, cloud infrastructure, and AI-powered features. I’m a continuous learner who enjoys solving problems, exploring new technologies, and using AI alongside my engineering skills to turn ideas into real, useful software.',
+  role: 'Full-Stack Developer, Singapore',
+  line: 'I’m a full-stack developer who enjoys building complete products, from interface to backend to deployment. I’m early in my career and focused on growing fast: learning cloud infrastructure, sharpening my AI engineering skills, and shipping projects that solve real problems.',
   focus: 'Full-Stack Development · AI Engineering · Cloud · Product Development',
-  openTo: 'Full-time Software Engineering roles',
-  gpa: '8.8 / 9',
+  openTo: 'Full-time Software Engineering roles (Junior)',
+  gpa: '8.39 / 9.00',
 }
 
 export const nav = [
@@ -197,7 +197,7 @@ export const experience = [
     when: 'Education',
     title: 'Computing education',
     place: 'PSB Academy → Massey University',
-    body: 'Diploma in InfoComm Technology at PSB Academy (Jan 2025), then a Bachelor of Information Sciences at Massey University — double major in Computer Science and Information Technology, 8.8 / 9 GPA (NZ grading system), conferred August 2026.',
+    body: 'Diploma in InfoComm Technology at PSB Academy (Jan 2025), then a Bachelor of Information Sciences at Massey University — double major in Computer Science and Information Technology, 8.39 / 9.00 GPA (NZ grading system), conferred August 2026. Top Student Award at graduation: highest GPA in the class of 2025–2026.',
   },
   {
     n: '02',
@@ -225,14 +225,14 @@ export const experience = [
     when: '2025 — Present',
     title: 'Freelance development',
     place: 'Singapore',
-    body: 'Delivering real client work — including CapyTech POS, a production point-of-sale and retail system running daily on a computer accessories shop PC. StudyMate AI, Dairy Flat Air, and this portfolio are live on the public internet.',
+    body: 'Delivering real client work — including CapyTech POS, a production point-of-sale and retail system running daily on a computer accessories shop PC. Also shipping SG BusFlow (Singapore buses and Ask BusFlow) and NetScope, a desktop network diagnostic. StudyMate AI, Dairy Flat Air, and this portfolio are live on the public internet.',
   },
   {
     n: '06',
     when: 'Now',
     title: 'Next opportunity',
-    place: 'Open to roles',
-    body: 'Open to full-time software engineering and focused freelance builds where design sense and engineering depth both matter.',
+    place: 'Open to junior roles',
+    body: 'Open to full-time junior software engineering roles and focused freelance builds where design sense and engineering depth both matter.',
   },
 ]
 
@@ -256,6 +256,19 @@ export const skills = {
   'Cloud / DevOps': ['AWS', 'Cloud Computing', 'Cloudflare', 'Vercel', 'Git', 'GitHub', 'GitHub Actions', 'Docker', 'CI/CD'],
   IoT: ['Raspberry Pi', 'IoT Systems', 'Cloud-Connected IoT'],
 }
+
+/** Languages and tools the shipped products are actually built in. */
+export const strongest = new Set([
+  'TypeScript',
+  'JavaScript',
+  'React',
+  'Next.js',
+  'Python',
+  'C#',
+  'Node.js',
+  'PostgreSQL',
+  'LangGraph',
+])
 
 export const aiCards = [
   {
@@ -302,11 +315,11 @@ export const capabilities = [
 export const currently = [
   { title: 'Building', detail: 'SG BusFlow — live buses and Ask BusFlow' },
   { title: 'Exploring', detail: 'Agentic workflows and RAG' },
-  { title: 'Open to', detail: 'Full-time software engineering roles' },
+  { title: 'Open to', detail: 'Full-time software engineering roles (Junior)' },
 ]
 
 export const stats = [
-  { label: 'Massey GPA', value: '8.8/9' },
+  { label: 'Massey GPA', value: '8.39/9.00' },
   { label: 'Shipped products', value: '6' },
   { label: 'IBM certificates', value: '2' },
 ]
@@ -315,7 +328,12 @@ export const education = [
   {
     kicker: 'Bachelor',
     name: 'Massey University',
-    detail: 'Bachelor of Information Sciences — Computer Science + Information Technology. 8.8 / 9 GPA (NZ grading). Conferred August 2026.',
+    detail: 'Bachelor of Information Sciences — Computer Science + Information Technology. 8.39 / 9.00 GPA (NZ grading). Conferred August 2026.',
+  },
+  {
+    kicker: 'Award',
+    name: 'Top Student Award',
+    detail: 'Highest GPA in the class of 2025–2026, awarded at graduation.',
   },
   {
     kicker: 'Diploma',

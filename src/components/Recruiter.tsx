@@ -66,7 +66,7 @@ export function Recruiter({ open, onClose }: { open: boolean; onClose: () => voi
         </div>
 
         <p className="mt-8 font-mono text-[11px] tracking-[0.18em] text-mute uppercase">Education & certs</p>
-        <p className="mt-2">Massey University — Bachelor of Information Sciences, CS + IT.</p>
+        <p className="mt-2">Massey University — Bachelor of Information Sciences, CS + IT. 8.39 / 9.00 GPA. Top Student Award, class of 2025–2026.</p>
         <div className="mt-2 flex flex-col gap-1">
           {certs.map((cert) => (
             <a key={cert.name} href={cert.href} target="_blank" rel="noreferrer" className="text-blue hover:underline">

@@ -16,7 +16,7 @@ export function Contact() {
             text="Let’s work together"
           />
           <p className="mt-4 max-w-md text-[var(--mute)]">
-            Open to full-time software engineering and focused freelance builds. Tap an icon to email, open GitHub, or connect on LinkedIn.
+            Open to junior full-time software engineering and focused freelance builds. Tap an icon to email, open GitHub, or connect on LinkedIn.
           </p>
           <ContactLinks />
         </Reveal>

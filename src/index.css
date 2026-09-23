@@ -187,6 +187,28 @@ section[id] {
   background: rgb(59 130 246 / 0.08);
 }
 
+.chip-strong {
+  border-color: rgb(34 197 94 / 0.5);
+  background: rgb(34 197 94 / 0.14);
+  color: #86efac;
+}
+
+html.light .chip-strong {
+  border-color: rgb(22 163 74 / 0.45);
+  background: rgb(34 197 94 / 0.16);
+  color: #15803d;
+}
+
+.chip-strong:hover {
+  border-color: #22c55e;
+  color: #bbf7d0;
+  background: rgb(34 197 94 / 0.22);
+}
+
+html.light .chip-strong:hover {
+  color: #166534;
+}
+
 .btn-glow {
   position: relative;
   overflow: hidden;

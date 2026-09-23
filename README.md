@@ -28,7 +28,7 @@ Work cards are the proof. SG BusFlow is a Singapore bus app with live arrivals a
 | **3D work gallery** | Desktop coverflow with `perspective` / `rotateY`; stacked cards on mobile. Selected screenshots use `object-contain` so UI is not cropped. |
 | **Finn AI** | A drawer that answers from a local knowledge base — SG BusFlow, NetScope, POS, StudyMate, Dairy Flat Air, education, GitHub, LinkedIn, and contact — not a hosted LLM. |
 | **Capabilities** | Full-stack, AI engineering, and production notes tied to the same shipped systems. |
-| **Path and awards** | PSB diploma, Massey BInfSc (CS + IT, 8.8 / 9 GPA, conferred August 2026), IBM RAG & Agentic AI and DevOps PDFs. |
+| **Path and awards** | PSB diploma, Massey BInfSc (CS + IT, 8.39 / 9.00 GPA, conferred August 2026, Top Student Award for the class of 2025–2026), IBM RAG & Agentic AI and DevOps PDFs. |
 | **Contact** | Email, GitHub, LinkedIn, and a form that opens the visitor’s mail app to `kokosaw804@gmail.com`. |
 | **Motion** | Lenis smooth scroll, Framer Motion reveals, magnetic buttons, scroll progress, and a desktop cursor spotlight. All of that is off under `prefers-reduced-motion`. |
 | **Theme** | Dark / light toggle persisted in the page shell. |

@@ -12,7 +12,7 @@ export function Awards() {
             text="Education and certificates"
           />
           <p className="mt-4 max-w-xl text-[var(--mute)]">
-            Diploma first. Then Massey at 8.8 / 9. IBM papers on RAG and DevOps on top.
+            Diploma first. Then Massey at 8.39 / 9.00, and Top Student at graduation. IBM papers on RAG and DevOps on top.
           </p>
         </Reveal>
         <div className="mt-12 grid gap-4 md:grid-cols-2">

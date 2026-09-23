@@ -4,12 +4,12 @@ const knowledge: Entry[] = [
   {
     keys: ['who is', 'who is he', 'who is saw', 'who is finn', 'about him', 'about saw', 'about finn', 'himself', 'bio', 'introduce', 'introduction'],
     answer:
-      "Saw Lwin Htoo — friends call him Finn. He's a full-stack developer in Singapore. He builds products from idea to production: thoughtful interfaces, scalable backends, databases, cloud, and AI-powered features. He's a continuous learner who uses AI alongside engineering to turn ideas into useful software. Proof: SG BusFlow with Ask BusFlow, NetScope for network diagnostics, CapyTech POS in a real shop, StudyMate AI at studymateai.app, Dairy Flat Air on Vercel, and this site at finn-portfolio-blush.vercel.app.",
+      "Saw Lwin Htoo — friends call him Finn. He's a full-stack developer in Singapore, early in his career and focused on growing fast. He enjoys building complete products, from interface to backend to deployment — learning cloud, sharpening AI engineering, and shipping work that solves real problems. Proof: SG BusFlow with Ask BusFlow, NetScope for network diagnostics, CapyTech POS in a real shop, StudyMate AI at studymateai.app, Dairy Flat Air on Vercel, and this site at finn-portfolio-blush.vercel.app.",
   },
   {
     keys: ['hire him', 'why hire', 'should i hire', 'recruiter', 'good fit', 'fit a role', 'open to'],
     answer:
-      "Hire him if you want someone who owns a whole product, not a single layer. He has shipped SG BusFlow (live Singapore buses plus Ask BusFlow), NetScope (desktop network diagnostics), a live client POS (money, stock, invoices), a production AI app with LangGraph + RAG, and a deployed booking system with timezone-aware scheduling. Diploma in InfoComm Technology (PSB Academy), then Massey BInfSc — CS + IT — 8.8 / 9 GPA, plus IBM certs in RAG & Agentic AI and DevOps. Based in Singapore, open to full-time software engineering and focused freelance work.",
+      "Hire him if you want someone who owns a whole product, not a single layer. He has shipped SG BusFlow (live Singapore buses plus Ask BusFlow), NetScope (desktop network diagnostics), a live client POS (money, stock, invoices), a production AI app with LangGraph + RAG, and a deployed booking system with timezone-aware scheduling. Diploma in InfoComm Technology (PSB Academy), then Massey BInfSc — CS + IT — 8.39 / 9.00 GPA, Top Student Award for the highest GPA in the class of 2025–2026, plus IBM certs in RAG & Agentic AI and DevOps. Based in Singapore, open to junior full-time software engineering and focused freelance work.",
   },
   {
     keys: ['where', 'location', 'singapore', 'based', 'city'],
@@ -57,9 +57,9 @@ const knowledge: Entry[] = [
       "This site is his personal portfolio, live at finn-portfolio-blush.vercel.app. React, TypeScript, Vite, Tailwind, Framer Motion, and Lenis. It shows the shipped work in a 3D coverflow, with case notes from the real systems, and Finn AI — this chat — answering from those products, education, and GitHub. Repo: github.com/Gooniez3/Finn-portfolio.",
   },
   {
-    keys: ['education', 'university', 'massey', 'degree', 'bachelor', 'diploma', 'psb', 'gpa', 'grade'],
+    keys: ['education', 'university', 'massey', 'degree', 'bachelor', 'diploma', 'psb', 'gpa', 'grade', 'top student', 'highest gpa', 'graduation'],
     answer:
-      "Diploma in InfoComm Technology at PSB Academy, awarded January 2025. Then a Bachelor of Information Sciences at Massey University — double major in Computer Science and Information Technology — 8.8 / 9 GPA on the NZ grading system, conferred August 2026. That's the academic base; the portfolio is the proof he turned it into shipped products.",
+      "Diploma in InfoComm Technology at PSB Academy, awarded January 2025. Then a Bachelor of Information Sciences at Massey University — double major in Computer Science and Information Technology — 8.39 / 9.00 GPA on the NZ grading system, conferred August 2026. At graduation he received the Top Student Award: highest GPA in the class of 2025–2026. That's the academic base; the portfolio is the proof he turned it into shipped products.",
   },
   {
     keys: ['certificate', 'certificates', 'ibm', 'devops', 'agentic'],
@@ -84,7 +84,7 @@ const knowledge: Entry[] = [
   {
     keys: ['experience', 'freelance', 'job history', 'client work'],
     answer:
-      "He's currently shipping as a freelance full-stack developer. Current build is SG BusFlow, a Singapore bus app with live arrivals and Ask BusFlow. Before that, NetScope, a desktop network diagnostic. The standout client system is CapyTech POS, in daily use at a computer accessories shop. Alongside that he built and deployed StudyMate AI, Dairy Flat Air, and this portfolio. Path: PSB diploma → Massey BInfSc at 8.8/9 → client and live products. He's looking at full-time software engineering roles as well as freelance product work.",
+      "He's currently shipping as a freelance full-stack developer. Current build is SG BusFlow, a Singapore bus app with live arrivals and Ask BusFlow. Before that, NetScope, a desktop network diagnostic. The standout client system is CapyTech POS, in daily use at a computer accessories shop. Alongside that he built and deployed StudyMate AI, Dairy Flat Air, and this portfolio. Path: PSB diploma → Massey BInfSc at 8.39/9.00, Top Student in the class of 2025–2026 → client and live products. He's looking at junior full-time software engineering roles as well as freelance product work.",
   },
 ]
 

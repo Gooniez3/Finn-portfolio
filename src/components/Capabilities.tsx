@@ -1,6 +1,27 @@
 import { motion } from 'framer-motion'
-import { capabilities, skills } from '../data/site'
+import { capabilities, skills, strongest } from '../data/site'
 import { Headline, Kicker, Reveal } from './Reveal'
+
+function SkillChip({ name, delay }: { name: string; delay: number }) {
+  const core = strongest.has(name)
+  return (
+    <motion.span
+      className={`chip inline-flex items-center gap-1 px-3 py-1.5 text-xs ${core ? 'chip-strong' : ''}`}
+      initial={{ opacity: 0, scale: 0.82, y: 10 }}
+      whileInView={{ opacity: 1, scale: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ delay, type: 'spring', stiffness: 260, damping: 18 }}
+    >
+      {core ? (
+        <span aria-hidden className="text-[10px] leading-none">
+          ★
+        </span>
+      ) : null}
+      {name}
+      {core ? <span className="sr-only"> (strongest)</span> : null}
+    </motion.span>
+  )
+}
 
 export function Capabilities() {
   return (
@@ -14,6 +35,12 @@ export function Capabilities() {
           />
           <p className="mt-4 max-w-2xl leading-relaxed text-[var(--mute)]">
             Full-stack, data, AI, cloud, and IoT — the same person from the interface to the till, the agent, and the deploy.
+          </p>
+          <p className="mt-5 flex flex-wrap items-center gap-2 text-sm text-[var(--mute)]">
+            <span className="chip chip-strong inline-flex items-center gap-1 px-3 py-1 text-xs">
+              <span aria-hidden>★</span> Strongest
+            </span>
+            Green starred chips are the languages and tools I actually ship with.
           </p>
         </Reveal>
 
@@ -32,16 +59,7 @@ export function Capabilities() {
               </p>
               <div className="flex flex-wrap gap-2">
                 {items.map((item, chip) => (
-                  <motion.span
-                    key={item}
-                    className="chip px-3 py-1.5 text-xs"
-                    initial={{ opacity: 0, scale: 0.82, y: 10 }}
-                    whileInView={{ opacity: 1, scale: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.03 * chip, type: 'spring', stiffness: 260, damping: 18 }}
-                  >
-                    {item}
-                  </motion.span>
+                  <SkillChip key={item} name={item} delay={0.03 * chip} />
                 ))}
               </div>
             </Reveal>
@@ -60,7 +78,11 @@ export function Capabilities() {
                 <p className="mt-2 text-sm leading-relaxed text-[var(--mute)]">{card.body}</p>
                 <div className="mt-4 flex flex-wrap gap-2">
                   {card.tags.map((tag) => (
-                    <span key={tag} className="chip px-2.5 py-1 text-[10px] tracking-[0.08em] uppercase">
+                    <span
+                      key={tag}
+                      className={`chip inline-flex items-center gap-1 px-2.5 py-1 text-[10px] tracking-[0.08em] uppercase ${strongest.has(tag) ? 'chip-strong' : ''}`}
+                    >
+                      {strongest.has(tag) ? <span aria-hidden>★</span> : null}
                       {tag}
                     </span>
                   ))}

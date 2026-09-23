@@ -102,7 +102,7 @@ export function Footer() {
               </li>
               <li>
                 <span className="block text-[var(--mute)]">Open to</span>
-                <span className="font-medium">Software engineering roles</span>
+                <span className="font-medium">{profile.openTo}</span>
               </li>
             </ul>
           </Reveal>
