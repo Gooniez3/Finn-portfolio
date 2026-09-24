@@ -1,79 +1,58 @@
-import { useState, type FormEvent } from 'react'
 import { profile } from '../data/site'
-import { ContactCompact, ContactLinks } from './Icons'
-import { Headline, Kicker, Reveal } from './Reveal'
+import { GitHubIcon, LinkedInIcon, MailIcon } from './Icons'
+import { Kicker, Reveal } from './Reveal'
 
-function ContactForm({ compact = false }: { compact?: boolean }) {
-  const [sent, setSent] = useState(false)
-
-  const submit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
-    const data = new FormData(event.currentTarget)
-    const name = String(data.get('name') || '')
-    const email = String(data.get('email') || '')
-    const message = String(data.get('message') || '')
-    window.location.href = `mailto:${profile.email}?subject=${encodeURIComponent(`Portfolio — ${name}`)}&body=${encodeURIComponent(`${message}\n\n${email}`)}`
-    setSent(true)
-  }
-
-  if (sent) {
-    return <p className="py-6 font-display text-xl font-bold">Opening your mail app.</p>
-  }
-
-  const field = 'mt-1.5 block w-full rounded-xl border bg-transparent px-3 py-2 text-sm outline-none'
-
-  return (
-    <form onSubmit={submit}>
-      <label className="block text-xs tracking-[0.08em] text-[var(--mute)] uppercase">
-        Name
-        <input required name="name" className={`${field} min-h-10`} style={{ borderColor: 'var(--line)' }} />
-      </label>
-      <label className="mt-3 block text-xs tracking-[0.08em] text-[var(--mute)] uppercase">
-        Email
-        <input required type="email" name="email" className={`${field} min-h-10`} style={{ borderColor: 'var(--line)' }} />
-      </label>
-      <label className="mt-3 block text-xs tracking-[0.08em] text-[var(--mute)] uppercase">
-        Message
-        <textarea required name="message" rows={compact ? 3 : 4} className={field} style={{ borderColor: 'var(--line)' }} />
-      </label>
-      <button
-        type="submit"
-        className="btn-glow mt-4 min-h-11 rounded-full px-5 py-2.5 text-[11px] tracking-[0.16em] uppercase"
-        style={{ background: 'var(--ink)', color: 'var(--bg)' }}
-      >
-        Send me a message →
-      </button>
-    </form>
-  )
-}
+const channels = [
+  { n: '01', label: 'Email', detail: profile.email, href: `mailto:${profile.email}`, Icon: MailIcon, external: false },
+  { n: '02', label: 'GitHub', detail: profile.githubName, href: profile.github, Icon: GitHubIcon, external: true },
+  { n: '03', label: 'LinkedIn', detail: 'saw-lwin-htoo', href: profile.linkedin, Icon: LinkedInIcon, external: true },
+]
 
 export function Contact() {
   return (
-    <section id="contact" className="relative scroll-mt-24 px-5 py-10 md:px-8 md:py-24">
-      <div className="mx-auto max-w-6xl md:hidden">
-        <Kicker>Contact</Kicker>
-        <h2 className="mt-2 font-display text-3xl font-bold tracking-[-0.04em]">Let’s work together</h2>
-        <p className="mt-2 text-sm leading-6 text-[var(--mute)]">Open to junior full-time software engineering and focused freelance builds.</p>
-        <div className="mt-4">
-          <ContactCompact />
-        </div>
-        <div className="panel mt-3 p-4">
-          <ContactForm compact />
-        </div>
-      </div>
-
-      <div className="mx-auto hidden max-w-6xl gap-10 md:grid lg:grid-cols-2">
+    <section id="contact" className="relative scroll-mt-24 px-5 py-12 md:px-8 md:py-24">
+      <div className="mx-auto grid max-w-6xl items-end gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:gap-12">
         <Reveal>
           <Kicker>Contact</Kicker>
-          <Headline className="mt-3 font-display text-6xl font-bold tracking-[-0.04em]" text="Let’s work together" />
-          <p className="mt-4 max-w-md text-[var(--mute)]">
-            Open to junior full-time software engineering and focused freelance builds. Tap an icon to email, open GitHub, or connect on LinkedIn.
+          <h2 className="mt-3 font-display text-5xl font-bold leading-[0.92] tracking-[-0.05em] md:text-7xl">
+            Let’s
+            <br />
+            work
+            <br />
+            together
+          </h2>
+          <p className="mt-5 max-w-sm text-sm leading-6 text-[var(--mute)] md:text-base">
+            Open to junior full-time software engineering and focused freelance builds.
           </p>
-          <ContactLinks />
         </Reveal>
-        <Reveal delay={0.12} y={40}>
-          <div className="card p-6">
-            <ContactForm />
+
+        <Reveal delay={0.08} y={28}>
+          <div className="grid gap-3">
+            {channels.map(({ n, label, detail, href, Icon, external }) => (
+              <a
+                key={label}
+                href={href}
+                className="flex items-center gap-4 rounded-2xl border px-4 py-3 transition hover:border-[#3b82f6]"
+                style={{ borderColor: 'var(--line)', background: 'var(--card)' }}
+                {...(external ? { target: '_blank', rel: 'noreferrer' } : {})}
+              >
+                <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl border" style={{ borderColor: 'var(--line)' }}>
+                  <Icon />
+                </span>
+                <span className="min-w-0 flex-1">
+                  <span className="block text-[10px] tracking-[0.16em] text-[var(--mute)] uppercase">{label}</span>
+                  <span className="mt-0.5 block truncate text-sm font-medium">{detail}</span>
+                </span>
+                <span className="text-[11px] tracking-[0.14em] text-[var(--mute)]">{n}</span>
+              </a>
+            ))}
+            <a
+              href={`mailto:${profile.email}`}
+              className="mt-1 flex min-h-12 items-center justify-center rounded-full border text-[12px] font-semibold tracking-[0.16em] uppercase transition hover:border-[#3b82f6]"
+              style={{ borderColor: 'var(--line)' }}
+            >
+              Send me a message →
+            </a>
           </div>
         </Reveal>
       </div>

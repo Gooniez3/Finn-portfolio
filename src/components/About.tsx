@@ -2,10 +2,22 @@ import { currently, profile, stats } from '../data/site'
 import { CountUp, Headline, Kicker, Reveal } from './Reveal'
 
 const about = [
-  'Friends call me Finn. I started with a Diploma in InfoComm Technology at PSB Academy and continued with a Bachelor of Information Sciences at Massey University, studying Computer Science and Information Technology.',
-  'I build products from idea to production — from thoughtful interfaces and reliable backends to databases, cloud infrastructure, and AI-powered features. Along the way, I’ve built SG BusFlow (Singapore bus arrivals and Ask BusFlow), NetScope for network diagnostics, a real POS system, an AI learning platform with RAG, a flight booking system built around real scheduling and timezone logic, and this site.',
-  'I’m also a first-principles learner. I like understanding how things work, picking up technologies I haven’t used before, and figuring out how to turn an idea into something people can actually use. I work with AI as part of my engineering workflow — not just to generate code, but to research, prototype, debug, experiment, and move from idea to implementation faster.',
-  'I’m still learning. I’m still building. And that’s the part I enjoy most.',
+  'Friends call me Finn. Diploma in InfoComm Technology at PSB Academy, then a Bachelor of Information Sciences at Massey University — Computer Science and Information Technology, 8.39 / 9.00, and Top Student in the class of 2025–2026.',
+  'I ship complete products: SG BusFlow, NetScope, a shop point of sale, StudyMate AI, Dairy Flat Air, and this site. I use AI to research, prototype, and debug, and I’m still learning — that’s the part I enjoy most.',
+]
+
+const nowIcons = [
+  <svg key="build" viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.7" aria-hidden>
+    <path d="m8 8-3 4 3 4M16 8l3 4-3 4M13 6l-2 12" />
+  </svg>,
+  <svg key="explore" viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.7" aria-hidden>
+    <path d="M9 3h6M10 3v5.2L6.2 17.2A3 3 0 0 0 9 22h6a3 3 0 0 0 2.8-4.8L14 8.2V3" />
+    <path d="M8.5 14h7" />
+  </svg>,
+  <svg key="open" viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.7" aria-hidden>
+    <circle cx="12" cy="8" r="3" />
+    <path d="M5.5 19.5c1.2-2.6 3.4-4 6.5-4s5.3 1.4 6.5 4" />
+  </svg>,
 ]
 
 export function About() {
@@ -61,9 +73,8 @@ export function About() {
           {currently.map((item, i) => (
             <Reveal key={item.title} delay={i * 0.1} y={24} blur={false}>
               <div className="flex items-start gap-3">
-                <span className="relative grid h-10 w-10 place-items-center rounded-full border" style={{ borderColor: 'var(--line)' }}>
-                  <span className="absolute h-2 w-2 animate-ping rounded-full bg-[#3b82f6] opacity-40" />
-                  <span className="relative h-2 w-2 rounded-full bg-[#3b82f6]" />
+                <span className="grid h-10 w-10 place-items-center rounded-full border text-[#93c5fd]" style={{ borderColor: 'var(--line)' }}>
+                  {nowIcons[i]}
                 </span>
                 <div>
                   <p className="font-medium">{item.title}</p>
