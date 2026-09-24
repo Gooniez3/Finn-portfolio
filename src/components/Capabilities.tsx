@@ -110,6 +110,7 @@ const proofRule = {
 
 function Chip({ name, delay }: { name: string; delay: number }) {
   const core = strongest.has(name)
+  const hasLogo = Object.hasOwn(logos, name)
   const Logo = logos[name]
   const reduce = useReducedMotion()
   return (
@@ -120,12 +121,12 @@ function Chip({ name, delay }: { name: string; delay: number }) {
       viewport={{ once: true, amount: 0.6 }}
       transition={{ duration: 0.35, delay, ease: [0.16, 1, 0.3, 1] }}
     >
-      {Logo ? (
+      {hasLogo ? (
         <span className={`inline-flex rounded-full ${core ? 'p-0.5 ring-2 ring-[#22c55e]' : ''}`}>
           <Logo aria-hidden className="text-[14px]" style={core ? { color: '#22c55e' } : undefined} />
         </span>
       ) : null}
-      {core && Logo ? <span className="sr-only">shipped in production</span> : null}
+      {core && hasLogo ? <span className="sr-only">shipped in production</span> : null}
       {name}
     </motion.span>
   )
