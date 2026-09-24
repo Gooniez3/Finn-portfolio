@@ -1,9 +1,49 @@
+import { motion, useReducedMotion } from 'framer-motion'
 import { currently, profile, stats } from '../data/site'
-import { CountUp, Headline, Kicker, Reveal } from './Reveal'
+import { CountUp, Kicker, Reveal } from './Reveal'
+
+const titleWords = ['Full-Stack', 'Developer', '&', 'AI']
+const titleEase = [0.16, 1, 0.3, 1] as const
+
+function AboutTitle() {
+  const reduce = useReducedMotion()
+
+  if (reduce) {
+    return (
+      <h2 className="mt-3 font-display text-4xl font-bold tracking-[-0.04em] md:text-6xl">
+        Full-Stack Developer & AI
+      </h2>
+    )
+  }
+
+  return (
+    <motion.h2
+      className="mt-3 font-display text-4xl font-bold tracking-[-0.04em] md:text-6xl"
+      aria-label="Full-Stack Developer & AI"
+      initial="hidden"
+      whileInView="show"
+      viewport={{ once: true, amount: 0.7 }}
+    >
+      {titleWords.map((word, i) => (
+        <span key={word} className="mr-[0.22em] inline-block overflow-hidden align-bottom pb-[0.08em]">
+          <motion.span
+            className="inline-block"
+            variants={{
+              hidden: { y: '110%' },
+              show: { y: '0%', transition: { duration: 0.55, delay: 0.15 + i * 0.14, ease: titleEase } },
+            }}
+          >
+            {word}
+          </motion.span>
+        </span>
+      ))}
+    </motion.h2>
+  )
+}
 
 const about = [
-  'Friends call me Finn. Diploma in InfoComm Technology at PSB Academy, then a Bachelor of Information Sciences at Massey University — Computer Science and Information Technology, 8.39 / 9.00, and Top Student in the class of 2025–2026.',
-  'I ship complete products: SG BusFlow, NetScope, a shop point of sale, StudyMate AI, Dairy Flat Air, and this site. I use AI to research, prototype, and debug, and I’m still learning — that’s the part I enjoy most.',
+  'Friends call me Finn. I earned a Diploma in InfoComm Technology from PSB Academy, followed by a Bachelor of Information Sciences at Massey University, majoring in Computer Science and Information Technology, with an 8.39/9.00 GPA and recognition as a Top Student in the 2025–2026 class.',
+  'I ship complete products: SG BusFlow, NetScope, a shop point-of-sale system, StudyMate AI, Dairy Flat Air, and this site. I’m a continuous learner, and I enjoy working in a team with others.',
 ]
 
 const nowIcons = [
@@ -26,11 +66,8 @@ export function About() {
       <div className="mx-auto max-w-[1100px]">
         <Reveal>
           <Kicker className="text-[var(--mute)]">About me</Kicker>
-          <Headline
-            className="mt-3 font-display text-4xl font-bold tracking-[-0.04em] md:text-6xl"
-            text="Full-Stack Developer & AI"
-          />
         </Reveal>
+        <AboutTitle />
 
         <div className="mt-12 flex flex-col gap-8 md:flex-row md:items-start">
           <Reveal y={28}>

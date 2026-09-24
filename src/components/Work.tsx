@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { AnimatePresence, motion } from 'framer-motion'
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import { projects } from '../data/site'
 import { Headline, Kicker, Reveal } from './Reveal'
 
@@ -19,6 +19,7 @@ export function Work() {
   const dragX = useRef<number | null>(null)
   const swiped = useRef(false)
   const project = projects[active]
+  const reduce = useReducedMotion()
 
   useEffect(() => {
     const mq = window.matchMedia('(min-width: 768px)')
@@ -82,10 +83,10 @@ export function Work() {
         >
           <div className="min-w-0 overflow-hidden">
             <motion.div
-              initial={{ opacity: 0 }}
+              initial={reduce ? false : { opacity: 0 }}
               whileInView={{ opacity: 1 }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+              viewport={{ once: true, amount: 0.35 }}
+              transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
               className="relative mx-auto h-[220px] max-w-6xl [transform-style:preserve-3d] md:h-[380px] lg:h-[420px]"
               style={{ perspective: wide ? '1200px' : '900px' }}
             >
@@ -183,20 +184,18 @@ export function Work() {
             </div>
           </div>
 
-          <div className="relative mt-2 hidden h-[380px] overflow-hidden md:block lg:mt-0 lg:h-[420px]" style={{ overflowAnchor: 'none' }}>
-            <AnimatePresence initial={false}>
-              <motion.div
-                key={project.id}
-                className="absolute inset-0"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.28 }}
-              >
-                <DeskCopy item={project} />
-              </motion.div>
-            </AnimatePresence>
-          </div>
+          <motion.div
+            className="relative mt-2 hidden min-h-[520px] md:block lg:mt-0"
+            style={{ overflowAnchor: 'none' }}
+            initial={reduce ? false : { opacity: 0, x: 28 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, amount: 0.25 }}
+            transition={{ duration: 0.6, delay: 0.12, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <motion.div key={project.id} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.28 }}>
+              <DeskCopy item={project} />
+            </motion.div>
+          </motion.div>
         </div>
       </div>
     </section>
@@ -220,11 +219,11 @@ function DeskCopy({ item }: { item: Project }) {
       <p className="text-[11px] font-semibold tracking-[0.2em] text-[#3b82f6] uppercase">{item.kicker}</p>
       <h3 className="mt-2 font-display text-4xl font-bold tracking-[-0.04em]">{item.name}</h3>
       <p className="mt-3 text-sm leading-6 text-[var(--mute)]">{item.blurb}</p>
-      <ul className="mt-4 grid gap-2 sm:grid-cols-2">
+      <ul className="mt-5 grid gap-x-6 gap-y-3 sm:grid-cols-2">
         {item.points.map((point) => (
           <li key={point.label} className="min-w-0">
             <p className="text-[10px] font-bold tracking-[0.14em] text-[#3b82f6] uppercase">{point.label}</p>
-            <p className="mt-0.5 line-clamp-2 text-[13px] leading-5 text-[var(--ink)]">{point.text}</p>
+            <p className="mt-0.5 text-[13px] leading-5 text-[var(--ink)]">{point.text}</p>
           </li>
         ))}
       </ul>

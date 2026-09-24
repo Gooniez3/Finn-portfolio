@@ -262,12 +262,21 @@ export const strongest = new Set([
   'TypeScript',
   'JavaScript',
   'React',
+  'React Native',
   'Next.js',
+  'Tailwind CSS',
+  'HTML',
+  'CSS',
   'Python',
   'C#',
+  'C++',
+  'ASP.NET Core',
   'Node.js',
   'PostgreSQL',
   'LangGraph',
+  'Vercel',
+  'GitHub',
+  'Docker',
 ])
 
 export const aiCards = [
@@ -313,7 +322,7 @@ export const capabilities = [
 ]
 
 export const currently = [
-  { title: 'Building', detail: 'SG BusFlow — live buses and Ask BusFlow' },
+  { title: 'Building', detail: 'Full-stack and AI products' },
   { title: 'Exploring', detail: 'Agentic workflows and RAG' },
   { title: 'Open to', detail: 'Full-time software engineering roles (Junior)' },
 ]

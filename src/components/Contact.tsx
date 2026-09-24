@@ -14,7 +14,7 @@ export function Contact() {
       <div className="mx-auto grid max-w-6xl items-end gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:gap-12">
         <Reveal>
           <Kicker>Contact</Kicker>
-          <h2 className="mt-3 font-display text-5xl font-bold leading-[0.92] tracking-[-0.05em] md:text-7xl">
+          <h2 className="mt-3 font-display text-6xl font-bold leading-[0.86] tracking-[-0.06em] sm:text-7xl lg:text-8xl xl:text-[7.5rem]">
             Let’s
             <br />
             work
